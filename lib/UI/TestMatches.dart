@@ -167,7 +167,7 @@ class _UpcomingtabState extends State<TestMatches> {
       size: size,
       request: request,
       adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
+          ? '${fbbannerid}'
           : 'ca-app-pub-1988118332072011/9771093059',
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
@@ -247,10 +247,10 @@ class _UpcomingtabState extends State<TestMatches> {
       isLoading=true;
     });
     if(widget.status=="recent"){
-      url="https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=runs,visitorteam,localteam,batting,bowling,league,stage,balls,firstUmpire,referee,venue&filter[status]=Finished&filter[starts_between]=${DateTime(today.year, today.month - 3, today.day).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+1).toString().substring(0,10)}&filter[type]=Test/5Day&sort=starting_at";
+      url="https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,league,stage,balls,firstUmpire,referee,venue&filter[status]=Finished&filter[starts_between]=${DateTime(today.year, today.month - 3, today.day).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+1).toString().substring(0,10)}&filter[type]=Test/5Day&sort=starting_at";
     }
     else{
-      url='https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=runs,visitorteam,localteam,batting,bowling,league,stage,balls,firstUmpire,venue,referee&filter[type]=Test/5Day&filter[status]=NS&sort=starting_at';
+      url='https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,league,stage,balls,firstUmpire,venue,referee&filter[type]=Test/5Day&filter[status]=NS&sort=starting_at';
     }
     SharedPreferences prefs=await SharedPreferences.getInstance();
     var newDate = new DateTime(selectedDate.year, selectedDate.month , selectedDate.day+1);
@@ -282,10 +282,11 @@ class _UpcomingtabState extends State<TestMatches> {
 
       } else {
         print("bjkb" + response.statusCode.toString());
+        showToast(response.body);
         // showToast("Mismatch Credentials");
         setState(() {
           isError = true;
-          isLoading = false;
+          isLoading = true;
         });
       }
     } catch (e) {

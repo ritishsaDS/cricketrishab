@@ -172,7 +172,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
       size: size,
       request: request,
       adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
+          ? '${fbbannerid}'
           : 'ca-app-pub-1988118332072011/9771093059',
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
@@ -334,7 +334,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
                                 //     ),
                                 //   ),
                                 // ),
-                               
+
                               ],
                             ),
                           )
@@ -353,27 +353,27 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
           AlertDialog(
 
             content: Container(
-              height: SizeConfig.screenHeight*0.15,
+              height: SizeConfig.screenHeight*0.08,
               child: Column(
                 children: [
-                  ElevatedButton(
-                    child: Row(
-                      children: [
-                        Image.asset("assets/icons/facebook.png",scale: 22,),
-                        Text(' Login with Facebook'),
-                      ],
-                    ),
-                    onPressed: () {
-                      initiateFacebookLogin();
-                    },
-                    style: ElevatedButton.styleFrom(
-                        primary: Color(0XFF3B5998),
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        textStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  SizedBox(height: 10,),
+                  // ElevatedButton(
+                  //   child: Row(
+                  //     children: [
+                  //       Image.asset("assets/icons/facebook.png",scale: 22,),
+                  //       Text(' Login with Facebook'),
+                  //     ],
+                  //   ),
+                  //   onPressed: () {
+                  //     initiateFacebookLogin();
+                  //   },
+                  //   style: ElevatedButton.styleFrom(
+                  //       primary: Color(0XFF3B5998),
+                  //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  //       textStyle: TextStyle(
+                  //           fontSize: 16,
+                  //           fontWeight: FontWeight.bold)),
+                  // ),
+
                   ElevatedButton(
                     child: Row(
                       children: [
@@ -436,7 +436,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
                       text:('Play Now'),
                     ),
                     Tab(
-                      text:('LeaderBoard'),
+                      text:('Leaderboard'),
                     ),
                     Tab(
                       text:('Prizes'),
@@ -826,7 +826,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
 
                             padding: EdgeInsets.all(10),
                             child: Column(children: [
-                              Text(userdetail[0]['email'].toString(),
+                              Text(userdetail[0]['name'].toString(),
                                   style: TextStyle(
 
                                       color: Colors.black))

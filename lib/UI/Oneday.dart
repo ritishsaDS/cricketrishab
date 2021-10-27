@@ -157,7 +157,7 @@ class _UpcomingtabState extends State<Oneday> {
       size: size,
       request: request,
       adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
+          ? '${fbbannerid}'
           : 'ca-app-pub-1988118332072011/9771093059',
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
@@ -271,10 +271,10 @@ class _UpcomingtabState extends State<Oneday> {
     });
 
     if(widget.status=="recent"){
-      url='https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=runs,visitorteam,localteam,batting,bowling,league,stage&filter%5Bstatus%5D=Finished&filter%5Bstarts_between%5D=${DateTime(today.year, today.month - 1, today.day).toString().substring(0,10)},${today.toString().substring(0,10)}&filter[type]=ODI&sort=starting_at';
+      url='https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,league,stage&filter%5Bstatus%5D=Finished&filter%5Bstarts_between%5D=${DateTime(today.year, today.month - 1, today.day).toString().substring(0,10)},${today.toString().substring(0,10)}&filter[type]=ODI&sort=starting_at';
     }
     else{
-      url='https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=venue,runs,visitorteam,localteam,batting,bowling,league,season,stage&sort=starting_at&filter[status]=NS&filter[type]=ODI';
+      url='https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=venue,runs,visitorteam,localteam,batting,bowling,league,season,stage&sort=starting_at&filter[status]=NS&filter[type]=ODI';
     }
     try {
       final response = await http.get(Uri.parse(url),headers: {
@@ -302,9 +302,10 @@ class _UpcomingtabState extends State<Oneday> {
       } else {
         print("bjkb" + response.statusCode.toString());
         // showToast("Mismatch Credentials");
+        showToast(response.body);
         setState(() {
           isError = true;
-          isLoading = false;
+          isLoading = true;
         });
       }
     } catch (e) {

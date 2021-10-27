@@ -1891,7 +1891,7 @@ class _TestmatchState extends State<Testmatchdetail> {
   var teams={};
   void getmatchdetail() async {
     print(";jnksdfmklsdko");
-    var url="https://cricket.sportmonks.com/api/v2.0/fixtures/${widget.id}?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=balls,runs,visitorteam,localteam,batting,bowling,league,stage,manofmatch,tosswon,lineup,venue,firstUmpire";
+    var url="https://cricket.sportmonks.com/api/v2.0/fixtures/${widget.id}?api_token=${matchkey}&include=balls,runs,visitorteam,localteam,batting,bowling,league,stage,manofmatch,tosswon,lineup,venue,firstUmpire";
     setState(() {
       isLoading=true;
     });
@@ -3237,7 +3237,7 @@ class _TestmatchState extends State<Testmatchdetail> {
   dynamic scoredata=new List();
   var outtypes={};
   void getoutdate() async{
-    var url="https://cricket.sportmonks.com/api/v2.0/scores?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu";
+    var url="https://cricket.sportmonks.com/api/v2.0/scores?api_token=${matchkey}";
     setState(() {
       isLoading=true;
     });

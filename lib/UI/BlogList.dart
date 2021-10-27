@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:CricScore_App/UI/quizdialog.dart';
 import 'package:CricScore_App/Utils/Colors.dart';
@@ -171,7 +172,7 @@ class _BlogListState extends State<BlogList> {
       size: size,
       request: request,
       adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
+          ? '${fbbannerid}'
           : 'ca-app-pub-1988118332072011/9771093059',
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
@@ -518,16 +519,17 @@ class _BlogListState extends State<BlogList> {
 
                     child: Text(
                         newsfromserver[i]['title'],maxLines:2, textAlign: TextAlign.justify,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),
+                    ),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                      newsfromserver[i]['description'],maxLines:2, textAlign: TextAlign.justify,),
+                      newsfromserver[i]['description'],maxLines:2, textAlign: TextAlign.justify,style: GoogleFonts.roboto(
+                    textStyle: TextStyle(color: Colors.black,),
+                  ),),
                   )
                 ],
               ),

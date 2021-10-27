@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart';
 import 'package:CricScore_App/Utils/Colors.dart';
 import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ANswer.dart';
 import 'Question.dart';
@@ -36,6 +39,58 @@ Color buttoncolor3=Color(lightBlue);
 Color buttoncolor4=Color(lightBlue);
 var quesyinindex;
 var chooseoption;
+  int maxFailedLoadAttempts = 3;
+  int item = 0;
+  static final AdRequest request = AdRequest(
+    keywords: <String>['foo', 'bar'],
+    contentUrl: 'http://foo.com/bar.html',
+    nonPersonalizedAds: true,
+  );
+
+  InterstitialAd _interstitialAd;
+  int _numInterstitialLoadAttempts = 0;
+
+  RewardedAd _rewardedAd;
+  int _numRewardedLoadAttempts = 0;
+
+  BannerAd _anchoredBanner;
+  bool _loadingAnchoredBanner = false;
+
+  Future<void> _createAnchoredBanner(BuildContext context) async {
+    final AnchoredAdaptiveBannerAdSize size =
+    await AdSize.getAnchoredAdaptiveBannerAdSize(
+      Orientation.portrait,
+      MediaQuery.of(context).size.width.truncate(),
+    );
+
+    if (size == null) {
+      print('Unable to get height of anchored banner.');
+      return;
+    }
+
+    final BannerAd banner = BannerAd(
+      size: size,
+      request: request,
+      adUnitId: Platform.isAndroid
+          ? '${fbbannerid}'
+          : 'ca-app-pub-1988118332072011/9771093059',
+      listener: BannerAdListener(
+        onAdLoaded: (Ad ad) {
+          print('$BannerAd loaded.');
+          setState(() {
+            _anchoredBanner = ad as BannerAd;
+          });
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print('$BannerAd failedToLoad: $error');
+          ad.dispose();
+        },
+        onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
+        onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
+      ),
+    );
+    return banner.load();
+  }
   @override
   void initState() {
     super.initState();
@@ -78,7 +133,12 @@ var chooseoption;
   var sendanswer=[];
   @override
   Widget build(BuildContext context) {
+    if (!_loadingAnchoredBanner) {
+      _loadingAnchoredBanner = true;
+      _createAnchoredBanner(context);
+    }
     return SafeArea(
+
     child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -137,6 +197,7 @@ var chooseoption;
             //onTap:widget.selectHandler
         ), //RaisedButton
       ),
+      SizedBox(height: 10,),
       Container(
         width: double.infinity,
         child: ElevatedButton(
@@ -184,6 +245,7 @@ var chooseoption;
           //onTap:widget.selectHandler
         ), //RaisedButton
       ),
+      SizedBox(height: 10,),
       Container(
         width: double.infinity,
         child: ElevatedButton(
@@ -231,6 +293,7 @@ var chooseoption;
           //onTap:widget.selectHandler
         ), //RaisedButton
       ),
+      SizedBox(height: 10,),
       Container(
         width: double.infinity,
         child: ElevatedButton(
@@ -282,42 +345,57 @@ var chooseoption;
          height: 80,
        ),
 
-      Container(
+      Center(
+        child: Container(
 
-        width: double.infinity,
-        child: GestureDetector(
-          onTap: (){
-            setState(() {
-              print(chooseoption);
-              sendanswertoserver(widget.questions[widget.questionIndex]['id'].toString(),chooseoption);
-              // print(widget.questions.length);
-              // if(widget.questionIndex==widget.questions.length-1){
-              //   sendanswer.add("OptionD+${widget.questions[widget.questionIndex]['id'].toString()}");
-              //   print(sendanswer);
-              //   sendanswertoserver(widget.questions[widget.questionIndex]['id'],"OptionD");
-              //   Navigator.push(context, MaterialPageRoute(builder: (context)=>Result(40,_resetQuiz)));
-              // }
-              // else{
-              //
-              //   sendanswertoserver(widget.questions[widget.questionIndex]['id'],"OptionD");
-              // }
-            });
-          },
-          child: Container(
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0), color: Colors.grey,),
-            margin: EdgeInsets.all(5),
-            alignment: Alignment.center,
-            height: SizeConfig.blockSizeVertical*7,
+          width: SizeConfig.screenWidth*0.5,
+          child: GestureDetector(
+            onTap: (){
+              setState(() {
+                if(chooseoption==null){
+                  showToast("Please Select Any Option");
+                }
 
+              else{
+                sendanswertoserver(widget.questions[widget.questionIndex]['id'].toString(),chooseoption);
+                }
+                // print(widget.questions.length);
+                // if(widget.questionIndex==widget.questions.length-1){
+                //   sendanswer.add("OptionD+${widget.questions[widget.questionIndex]['id'].toString()}");
+                //   print(sendanswer);
+                //   sendanswertoserver(widget.questions[widget.questionIndex]['id'],"OptionD");
+                //   Navigator.push(context, MaterialPageRoute(builder: (context)=>Result(40,_resetQuiz)));
+                // }
+                // else{
+                //
+                //   sendanswertoserver(widget.questions[widget.questionIndex]['id'],"OptionD");
+                // }
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0), color:chooseoption!=null?Colors.green: Colors.grey,),
+              margin: EdgeInsets.all(5),
+              alignment: Alignment.center,
+              height: SizeConfig.blockSizeVertical*7,
 
+width: SizeConfig.screenWidth*0.2,
 
-            child: Text("SUBMIT",style: TextStyle(fontSize: 16,color: Colors.white,),),
+              child: Text("SUBMIT",style: TextStyle(fontSize: 16,color: Colors.white,),),
 
-          ),
-          //onTap:widget.selectHandler
-        ), //RaisedButton
+            ),
+            //onTap:widget.selectHandler
+          ), //RaisedButton
+        ),
       ),
+        Expanded(child: SizedBox(),)
+      ,
+      if (_anchoredBanner != null)
+        Container(
+          color: Colors.green,
+          width: _anchoredBanner.size.width.toDouble(),
+          height: _anchoredBanner.size.height.toDouble(),
+          child: AdWidget(ad: _anchoredBanner),),
         // ...(widget.questions[widget.questionIndex]['optionA']).map((answer) {
         //   return Answer(() => widget.answerQuestion(answer['score']), answer['text']);
         // }).toList()
@@ -331,12 +409,14 @@ var chooseoption;
     });
   }
   Future<void> sendanswertoserver(id,option) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.getString('userid');
     try {
       final response = await post(Uri.parse(
           'http://18.216.40.7/api/attempt'),
           body: {
             "quizid":id.toString(),
-            "userid":"1",
+            "userid": preferences.getString('userid'),
             "answered":option
           });
       print("bjkb" + response.statusCode.toString());
@@ -355,6 +435,9 @@ var chooseoption;
             }
             else{
             widget.questionIndex=widget.questionIndex+1;
+            setState(() {
+            chooseoption=null;
+            });
             //  sendanswertoserver(widget.questions[widget.questionIndex]['id'],"OptionD");
             }
 

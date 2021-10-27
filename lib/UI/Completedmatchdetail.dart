@@ -177,7 +177,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
       size: size,
       request: request,
       adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
+          ? '${fbbannerid}'
           : 'ca-app-pub-1988118332072011/9771093059',
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
@@ -1551,7 +1551,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
   dynamic scoredata=new List();
   var outtypes={};
   void getmatchdetail() async {
-    var url="https://cricket.sportmonks.com/api/v2.0/fixtures/${widget.id}?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=balls,runs,visitorteam,localteam,batting,bowling,league,stage,manofmatch,tosswon,lineup,venue,firstUmpire";
+    var url="https://cricket.sportmonks.com/api/v2.0/fixtures/${widget.id}?api_token=${matchkey}&include=balls,runs,visitorteam,localteam,batting,bowling,league,stage,manofmatch,tosswon,lineup,venue,firstUmpire";
     setState(() {
       isLoading=true;
     });
@@ -1633,7 +1633,7 @@ print(scorecardb);
     }
   }
   void getoutdate() async{
-    var url="https://cricket.sportmonks.com/api/v2.0/scores?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu";
+    var url="https://cricket.sportmonks.com/api/v2.0/scores?api_token=${matchkey}";
     setState(() {
       isLoading=true;
     });

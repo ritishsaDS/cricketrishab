@@ -8,3 +8,6 @@ dynamic teamlogos=[];
 var map = {};
 var playersa = {};
 var playersb = {};
+var matchkey;
+var fbbannerid;
+var fbinterstetialid;

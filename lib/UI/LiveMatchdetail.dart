@@ -25,9 +25,12 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
   bool scoreboard = false;
   bool isLoading = false;
   bool isError = false;
+  var url;
   @override
   void initState() {
-   // getlivescore();
+     url= 'https://cricket.sportmonks.com/api/v2.0/livescores/${widget.id}?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,tosswon,league,stage,lineup,firstUmpire,balls,venue,,balls.batsmanone,balls.batsmantwo';
+
+    // getlivescore();
     getoutdate();
     getlivescore();
    // getlivescore();
@@ -36,7 +39,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
    // getmatches();
     // getlivescore();
 
-    // TODO: implement initState
+
     super.initState();
   }
 
@@ -1281,9 +1284,9 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                   "Toss",
                                   style: TextStyle(color: Colors.grey[700]),
                                 ),
-                                // Text(
-                                //     scorefromserver['tosswon']['name'],
-                                //     style: TextStyle(color: Colors.black))
+                                Text(
+                                    scorefromserver['tosswon']==null?"": scorefromserver['tosswon']['name'],
+                                    style: TextStyle(color: Colors.black))
                               ]),
                         ),
                         Divider(
@@ -1413,7 +1416,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                           scorefromserver['localteam']['code'],
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 14,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Expanded(child: SizedBox()),
@@ -1427,11 +1430,11 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                                 .toString() + ")",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 16,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)): scorefromserver['toss_won_team_id']==teamaid&&scorefromserver['elected']=="bowling" ?Text("0/0 (0.0)",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)): scorefromserver['toss_won_team_id']==teambid&&scorefromserver['elected']=="bowling" ?
                                         Text(scorefromserver['runs'][0]['score']
                                             .toString() + "/" +
@@ -1442,11 +1445,11 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                             ,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)):Text("0/0 (0.0)",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)):
                                        scorefromserver['runs'][0]['team_id'] == teamaid ?
                                         Text(
@@ -1461,7 +1464,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                             ,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)) : Text(
                                            scorefromserver['runs'].length == 1
                                                 ? ""
@@ -1474,7 +1477,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                             ,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold))
                                         // Text(
                                         //     scorefromserver['runs'].length==1?"":scorefromserver['runs'][1]['score'].toString()+"/"+scorefromserver['runs'][1]['wickets'].toString()+" ("+scorefromserver['runs'][1]['overs'].toString()+")",
@@ -1502,7 +1505,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                           scorefromserver['visitorteam']['code'],
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 14,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Expanded(child: SizedBox()),
@@ -1515,7 +1518,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                                 .toString() + ")",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 16,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)): scorefromserver['toss_won_team_id']==teamaid&&scorefromserver['elected']=="batting" ?Text("0/0 (0.0)",
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -1530,11 +1533,11 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                             ,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)):Text("0/0 (0.0)",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)):scorefromserver['runs'][1]['team_id'] ==
                                             teambid ?
                                         Text(
@@ -1549,7 +1552,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                             ,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)) : Text(
                                            scorefromserver['runs'].length == 0
                                                 ? ""
@@ -1562,7 +1565,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                             ,
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: SizeConfig.blockSizeVertical * 2,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold)),
                                       ],
                                     ),
@@ -1584,311 +1587,506 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                                                         color: Color(0XFFF0F0F0),
                                                       ),
                                                       width: SizeConfig.screenWidth,
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment.spaceBetween,
+                                                      child:  Table(
+                                                        columnWidths: {
+                                                          0: FlexColumnWidth(6),
+                                                          1: FlexColumnWidth(2),
+                                                          2: FlexColumnWidth(2),
+                                                          3: FlexColumnWidth(2),
+                                                          4: FlexColumnWidth(2),
+                                                          5: FlexColumnWidth(2.5),
+                                                        },
+                                                        //defaultColumnWidth: FixedColumnWidth(140.0),
+                                                        border: TableBorder(
+
+
+                                                        ),
+
                                                         children: [
-                                                          Container(
-                                                            width: SizeConfig.screenWidth * 0.4,
-                                                            margin: EdgeInsets.only(
-                                                                left:
-                                                                    SizeConfig.screenWidth * 0.02),
-                                                            child: Text("Batting"),
-                                                          ),
-                                                          Container(
-                                                            width: SizeConfig.screenWidth * 0.51,
-                                                            margin: EdgeInsets.only(
-                                                                right:
-                                                                SizeConfig.screenWidth * 0.01),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment.spaceBetween,
-                                                              children: [
-                                                                Container(
-                                                                  width:
-                                                                      SizeConfig.screenWidth * 0.05,
-                                                                  child: Text("R"),
-                                                                ),
-                                                                Container(
-                                                                  width:
-                                                                      SizeConfig.screenWidth * 0.05,
-                                                                  child: Text("B"),
-                                                                ),
-                                                                Container(
-                                                                  width:
-                                                                      SizeConfig.screenWidth * 0.05,
-                                                                  child: Text("4s"),
-                                                                ),
-                                                                Container(
-                                                                  width:
-                                                                      SizeConfig.screenWidth * 0.05,
-                                                                  child: Text("6s"),
-                                                                ),
-                                                                Container(
-                                                                  width:
-                                                                  SizeConfig.screenWidth * 0.09,
-                                                                  child: Text("S/R"),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
+                                                          TableRow(children: [
+                                                            Container(
+                                                                child: Container(
+
+                                                                    padding: EdgeInsets.only(top:10,left:8),
+                                                                    child: Text( "Batting",
+
+                                                                        textAlign: TextAlign.start,
+                                                                        style: TextStyle(
+                                                                            fontSize: 16.0,
+                                                                            fontWeight:
+                                                                            FontWeight.bold)))),
+                                                            Container(
+
+                                                                padding: EdgeInsets.only(top:10),
+                                                                child: Column(children: [
+                                                                  Text(" R",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight.w600,
+                                                                          fontSize: 16,
+                                                                          color: Colors.black))
+                                                                ])),
+
+                                                            Container(
+
+                                                                padding: EdgeInsets.all(10),
+                                                                child: Column(children: [
+                                                                  Text( "B",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight.w600,
+                                                                          fontSize: 16,
+                                                                          color: Colors.black))
+                                                                ])),
+                                                            Container(
+
+                                                                padding: EdgeInsets.all(10),
+                                                                child: Column(children: [
+                                                                  Text( "4s",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight.w600,
+                                                                          fontSize: 16,
+                                                                          color: Colors.black))
+                                                                ])),
+                                                            Container(
+
+                                                                padding: EdgeInsets.all(10),
+                                                                child: Column(children: [
+                                                                  Text( "6s",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight.w600,
+                                                                          fontSize: 16,
+                                                                          color: Colors.black))
+                                                                ])),
+                                                            Container(
+
+                                                                padding: EdgeInsets.all(10),
+                                                                child: Column(children: [
+                                                                  Text( "SR",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight.w600,
+                                                                          fontSize: 16,
+                                                                          color: Colors.black))
+                                                                ]))
+
+                                                            //Container( padding:EdgeInsets.all(10),child: Column(children:[Text('Score', style: TextStyle(fontSize: 12.0))])),
+                                                          ])
+
                                                         ],
                                                       ),
                                                     ),
-                        scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_one_on_creeze_id']==null?Container(): Container(
-                                     decoration: BoxDecoration(
-                                       color: Colors.white,
-                                     ),
-                                     width: SizeConfig.screenWidth,
-                                     margin: EdgeInsets.only(
-                                         top: SizeConfig.blockSizeVertical),
-                                     child: Row(
-                                       mainAxisAlignment:
-                                           MainAxisAlignment.spaceBetween,
-                                       children: [
-                                         Container(
-                                           width: SizeConfig.screenWidth * 0.4,
-                                           margin: EdgeInsets.only(
-                                               left:
-                                                   SizeConfig.screenWidth * 0.01),
-                                           child: Text(
-                                             teams[scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_one_on_creeze_id']],
-                                             style: TextStyle(
-                                                 fontWeight: FontWeight.bold),
-                                           ),
-                                         ),
-                                         Container(
-                                           width: SizeConfig.screenWidth * 0.515,
-                                           margin: EdgeInsets.only(
-                                               right:
-                                                   SizeConfig.screenWidth * 0.01),
-                                           child: Row(
-                                             mainAxisAlignment:
-                                                 MainAxisAlignment.spaceBetween,
-                                             children: [
-                                               Container(
-                                                 width:
-                                                 SizeConfig.screenWidth * 0.06,
-                                                 child: Text(
-                                                     " ${Strikerruns}"
-                                                         .toString()),
-                                               ),
-                                               Container(
-                                                 width:
-                                                 SizeConfig.screenWidth * 0.05,
-                                                 child: Text(
-                                                     "${Strikerballs}"
-                                                         .toString()),
-                                               ),
-                                               Container(
-                                                 width:
-                                                 SizeConfig.screenWidth * 0.05,
-                                                 child: Text(
-                                                     "${Strikerfours}"
-                                                         .toString()),
-                                               ),
-                                               Container(
-                                                   width:
-                                                   SizeConfig.screenWidth * 0.05,
-                                                   child: Text(
-                                                       "${Strikersix}"
-                                                           .toString())),
-                                               Container(
-                                                   width:
-                                                   SizeConfig.screenWidth * 0.09,
-                                                   child: Text(
-                                                       "${Strikerrate}"
-                                                           .toString()))
-                                             ],
-                                           ),
-                                         ),
-                                       ],
-                                     ),
-                                   ),
-                        scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_two_on_creeze_id']==null?Container():Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          width: SizeConfig.screenWidth,
-                          margin: EdgeInsets.only(
-                              top: SizeConfig.blockSizeVertical),
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
+                        scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_one_on_creeze_id']==null?Container():
+                        Table(
+                          columnWidths: {
+                            0: FlexColumnWidth(6),
+                            1: FlexColumnWidth(2),
+                            2: FlexColumnWidth(2),
+                            3: FlexColumnWidth(2),
+                            4: FlexColumnWidth(2),
+                            5: FlexColumnWidth(2.5),
+                          },
+                          //defaultColumnWidth: FixedColumnWidth(140.0),
+                        
+                          children: [
+                            TableRow(children: [
                               Container(
-                                width: SizeConfig.screenWidth * 0.4,
-                                margin: EdgeInsets.only(
-                                    left:
-                                    SizeConfig.screenWidth * 0.02),
-                                child: Text(
-                                "${teams[scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_two_on_creeze_id']]}",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                                  child: Container(
+
+                                      padding: EdgeInsets.only(top:10,left:8),
+                                      child: Text(                                             teams[scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_one_on_creeze_id']],
+
+                                          textAlign: TextAlign.start,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              )))),
                               Container(
-                                width: SizeConfig.screenWidth * 0.51,
-                                margin: EdgeInsets.only(
-                                    right:
-                                    SizeConfig.screenWidth * 0.01),
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                        width:
-                                      SizeConfig.screenWidth * 0.06,
-                                      child: Text(
-                                          " ${nonStrikerruns}"
-                                              .toString()),
-                                    ),
-                                    Container(
-                                        width:
-                                      SizeConfig.screenWidth * 0.05,
-                                      child: Text(
-                                          "${nonStrikerballs}"
-                                              .toString()),
-                                    ),
-                                    Container(
-                                        width:
-                                      SizeConfig.screenWidth * 0.05,
-                                      child: Text(
-                                          "${nonStrikerfours}"
-                                              .toString()),
-                                    ),
-                                    Container(
-                                            width:
-                                        SizeConfig.screenWidth * 0.05,
-                                        child: Text(
-                                            "${nonStrikersix}"
-                                                .toString())),
-                                    Container(
-                                        width:
-                                        SizeConfig.screenWidth * 0.09,
-                                        child: Text(
-                                            "${nonStrikerrate}"
-                                                .toString()))
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+
+                                  padding: EdgeInsets.only(top:10),
+                                  child: Column(children: [
+                                    Text(" ${Strikerruns}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+
+                              Container(
+                                 
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${Strikerballs}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+                               
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${Strikerfours}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${Strikersix}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+                                 
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${Strikerrate}",
+                                        style: TextStyle(
+                                            
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ]))
+
+                              //Container( padding:EdgeInsets.all(10),child: Column(children:[Text('Score', style: TextStyle(fontSize: 12.0))])),
+                            ])
+
+                          ],
                         ),
-     Container(
-                                     decoration: BoxDecoration(
-                                       color: Color(0XFFF0F0F0),
-                                     ),
-                                     width: SizeConfig.screenWidth,
-                                     margin: EdgeInsets.only(
-                                         top: SizeConfig.blockSizeVertical * 2),
-                                     child: Row(
-                                       mainAxisAlignment:
-                                           MainAxisAlignment.spaceBetween,
-                                       children: [
-                                         Container(
-                                           width: SizeConfig.screenWidth * 0.3,
-                                           margin: EdgeInsets.only(
-                                               left:
-                                                   SizeConfig.screenWidth * 0.02),
-                                           child: Text("Bowling"),
-                                         ),
-                                         Container(
-                                           width: SizeConfig.screenWidth * 0.5,
-                                           margin: EdgeInsets.only(
-                                               right:
-                                                   SizeConfig.screenWidth * 0.02),
-                                           child: Row(
-                                             mainAxisAlignment:
-                                                 MainAxisAlignment.spaceBetween,
-                                             children: [
-                                               Container(
-                                                 child: Text("O"),
-                                               ),
-                                               Container(
-                                                 child: Text("M"),
-                                               ),
-                                               Container(
-                                                 child: Text("R"),
-                                               ),
-                                               Container(
-                                                 child: Text("W"),
-                                               ),
-                                               Container(
-                                                 child: Text("Econ."),
-                                               ),
-                                             ],
-                                           ),
-                                         ),
-                                       ],
-                                     ),
-                                   ),
+                        // Container(
+                        //              decoration: BoxDecoration(
+                        //                color: Colors.white,
+                        //              ),
+                        //              width: SizeConfig.screenWidth,
+                        //              margin: EdgeInsets.only(
+                        //                  top: SizeConfig.blockSizeVertical),
+                        //              child: Row(
+                        //                mainAxisAlignment:
+                        //                    MainAxisAlignment.spaceBetween,
+                        //                children: [
+                        //                  Container(
+                        //                    width: SizeConfig.screenWidth * 0.4,
+                        //                    margin: EdgeInsets.only(
+                        //                        left:
+                        //                            SizeConfig.screenWidth * 0.01),
+                        //                    child: Text(
+                        //                      teams[scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_one_on_creeze_id']],
+                        //                      style: TextStyle(
+                        //                          fontWeight: FontWeight.bold),
+                        //                    ),
+                        //                  ),
+                        //                  Container(
+                        //                    width: SizeConfig.screenWidth * 0.515,
+                        //                    margin: EdgeInsets.only(
+                        //                        right:
+                        //                            SizeConfig.screenWidth * 0.01),
+                        //                    child: Row(
+                        //                      mainAxisAlignment:
+                        //                          MainAxisAlignment.spaceBetween,
+                        //                      children: [
+                        //                        Container(
+                        //                          width:
+                        //                          SizeConfig.screenWidth * 0.06,
+                        //                          child: Text(
+                        //                              " ${Strikerruns}"
+                        //                                  .toString()),
+                        //                        ),
+                        //                        Container(
+                        //                          width:
+                        //                          SizeConfig.screenWidth * 0.05,
+                        //                          child: Text(
+                        //                              "${Strikerballs}"
+                        //                                  .toString()),
+                        //                        ),
+                        //                        Container(
+                        //                          width:
+                        //                          SizeConfig.screenWidth * 0.05,
+                        //                          child: Text(
+                        //                              "${Strikerfours}"
+                        //                                  .toString()),
+                        //                        ),
+                        //                        Container(
+                        //                            width:
+                        //                            SizeConfig.screenWidth * 0.05,
+                        //                            child: Text(
+                        //                                "${Strikersix}"
+                        //                                    .toString())),
+                        //                        Container(
+                        //                            width:
+                        //                            SizeConfig.screenWidth * 0.09,
+                        //                            child: Text(
+                        //                                "${Strikerrate}"
+                        //                                    .toString()))
+                        //                      ],
+                        //                    ),
+                        //                  ),
+                        //                ],
+                        //              ),
+                        //            ),
+                        scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_two_on_creeze_id']==null?Container():
+                        Table(
+                          columnWidths: {
+                            0: FlexColumnWidth(6),
+                            1: FlexColumnWidth(2),
+                            2: FlexColumnWidth(2),
+                            3: FlexColumnWidth(2),
+                            4: FlexColumnWidth(2),
+                            5: FlexColumnWidth(2.5),
+                          },
+                          //defaultColumnWidth: FixedColumnWidth(140.0),
+                         
+
+                          children: [
+                            TableRow(children: [
+                              Container(
+                                  child: Container(
+
+                                      padding: EdgeInsets.only(top:10,left:8),
+                                      child: Text(     "${teams[scorefromserver['balls'][scorefromserver['balls'].length-1]['batsman_two_on_creeze_id']]}",
+
+                                          textAlign: TextAlign.start,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                             )))),
+                              Container(
+
+                                  padding: EdgeInsets.only(top:10),
+                                  child: Column(children: [
+                                    Text(" ${nonStrikerruns}",
+                                        style: TextStyle(
+                                         
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${nonStrikerballs}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${nonStrikerfours}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${nonStrikersix}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( "${nonStrikerrate}",
+                                        style: TextStyle(
+                                           
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ]))
+
+                              //Container( padding:EdgeInsets.all(10),child: Column(children:[Text('Score', style: TextStyle(fontSize: 12.0))])),
+                            ])
+
+                          ],
+                        ),
+
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Color(0XFFF0F0F0),
                           ),
                           width: SizeConfig.screenWidth,
-                          margin: EdgeInsets.only(
-                              top: SizeConfig.blockSizeVertical),
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                          child:  Table(
+                            columnWidths: {
+                              0: FlexColumnWidth(6),
+                              1: FlexColumnWidth(2),
+                              2: FlexColumnWidth(2),
+                              3: FlexColumnWidth(2),
+                              4: FlexColumnWidth(2),
+                              5: FlexColumnWidth(2.5),
+                            },
+                            //defaultColumnWidth: FixedColumnWidth(140.0),
+                            border: TableBorder(
+
+
+                            ),
+
                             children: [
-                              scorefromserver ['balls'][scorefromserver['balls'].length-1]['bowler']==null?Container():  Container(
-                                width: SizeConfig.screenWidth * 0.3,
-                                margin: EdgeInsets.only(
-                                    left:
-                                    SizeConfig.screenWidth * 0.02),
-                                child: Text(
-                                  "${scorefromserver['balls'][scorefromserver['balls'].length-1]['bowler']['fullname']}",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Container(
-                                width: SizeConfig.screenWidth * 0.50,
-                                margin: EdgeInsets.only(
-                                    right:
-                                    SizeConfig.screenWidth * 0.02),
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
+                              TableRow(children: [
+                                Container(
+                                    child: Container(
 
-                                      child: Text(
-                                          " ${currentbowler['overs']}"
-                                              .toString()),
-                                    ),
-                                    Container(
+                                        padding: EdgeInsets.only(top:10,left:8),
+                                        child:
+                                          Text( "Bowling",
 
-                                      child: Text(
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontWeight:
+                                                  FontWeight.bold))
+                                        )),
+                                Container(
 
-                                          "${currentbowler['runs']}"
-                                              .toString()),
-                                    ),
-                                    Container(
+                                    padding: EdgeInsets.only(top:10),
+                                    child: Column(children: [
+                                      Text(" O",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                              color: Colors.black))
+                                    ])),
 
-                                      child: Text(
-                                          "${currentbowler['wickets']}"
-                                              .toString()),
-                                    ),
-                                    Container(
+                                Container(
 
-                                        child: Text(
-                                            "${currentbowler['medians'].toString()}"
-                                                .toString())),
-                                    Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(children: [
+                                      Text( "R",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                              color: Colors.black))
+                                    ])),
+                                Container(
 
-                                        child: Text(
-                                            "${currentbowler['rate']}"
-                                                .toString()))
-                                  ],
-                                ),
-                              ),
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(children: [
+                                      Text( "W",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                              color: Colors.black))
+                                    ])),
+                                Container(
+
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(children: [
+                                      Text( "M",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                              color: Colors.black))
+                                    ])),
+                                Container(
+
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(children: [
+                                      Text( "Eco",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                              color: Colors.black))
+                                    ]))
+
+                                //Container( padding:EdgeInsets.all(10),child: Column(children:[Text('Score', style: TextStyle(fontSize: 12.0))])),
+                              ])
+
                             ],
                           ),
                         ),
+                        scorefromserver ['balls'][scorefromserver['balls'].length-1]['bowler']==null?Container():  Table(
+                          columnWidths: {
+                            0: FlexColumnWidth(6),
+                            1: FlexColumnWidth(2),
+                            2: FlexColumnWidth(2),
+                            3: FlexColumnWidth(2),
+                            4: FlexColumnWidth(2),
+                            5: FlexColumnWidth(2.5),
+                          },
+                          //defaultColumnWidth: FixedColumnWidth(140.0),
+                        
+
+                          children: [
+                            TableRow(children: [
+                              Container(
+                                  child: Container(
+
+                                      padding: EdgeInsets.only(top:10,left:8),
+                                      child: Text(     "${scorefromserver['balls'][scorefromserver['balls'].length-1]['bowler']['fullname']}",
+
+                                          textAlign: TextAlign.start,
+
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+
+                                             )))),
+                              Container(
+
+                                  padding: EdgeInsets.only(top:10),
+                                  child: Column(children: [
+                                    Text("  ${currentbowler['overs']}",
+                                        style: TextStyle(
+                                           
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( " ${currentbowler['runs']}",
+                                        style: TextStyle(
+                                           
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( " ${currentbowler['wickets']}",
+                                        style: TextStyle(
+                                            
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( " ${currentbowler['medians']}",
+                                        style: TextStyle(
+                                           
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ])),
+                              Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(children: [
+                                    Text( " ${currentbowler['rate']}",
+                                        style: TextStyle(
+
+                                            fontSize: 16,
+                                            color: Colors.black))
+                                  ]))
+
+                              //Container( padding:EdgeInsets.all(10),child: Column(children:[Text('Score', style: TextStyle(fontSize: 12.0))])),
+                            ])
+
+                          ],
+                        ),
+
                         Divider(
                           thickness: 1.5,
                         ),
@@ -2087,7 +2285,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                         // ),
 
                         Container(
-                          height: SizeConfig.screenHeight*0.30,
+                          height: SizeConfig.screenHeight*0.24,
                           child: ListView(
                             children: balls(),
                           ),
@@ -2993,8 +3191,8 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     });
 
     try {
-      final response = await get(Uri.parse(
-          'https://cricket.sportmonks.com/api/v2.0/fixtures/${widget.id}?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=runs,visitorteam,localteam,batting,bowling,league,stage,lineup,balls,venue,,balls.batsmanone,balls.batsmantwo'));
+      final response = await get(Uri.parse(url));
+
       print("bjkbjjj" + response.request.url.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
@@ -3118,6 +3316,8 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
         print("bjkb" + response.statusCode.toString());
          showToast(response.body);
         setState(() {
+          url='https://cricket.sportmonks.com/api/v2.0/fixtures/${widget.id}?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,tosswon,league,stage,lineup,firstUmpire,balls,venue,,balls.batsmanone,balls.batsmantwo';
+
           isError = true;
           isLoading = true;
         });
@@ -4319,7 +4519,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return balllist;
   }
   void getoutdate() async{
-    var url="https://cricket.sportmonks.com/api/v2.0/scores?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu";
+    var url="https://cricket.sportmonks.com/api/v2.0/scores?api_token=${matchkey}";
     setState(() {
       isLoading=true;
     });

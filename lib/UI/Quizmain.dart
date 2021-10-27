@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:CricScore_App/UI/quizdialog.dart';
 import 'package:CricScore_App/Utils/Colors.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:http/http.dart'as http;
 import 'Quizclass.dart';
@@ -13,7 +15,8 @@ import 'Result.dart';
 
 class Quizmain extends StatefulWidget {
   var id;
-  Quizmain({this.id});
+  var matchname;
+  Quizmain({this.id,this.matchname});
   @override
   State<StatefulWidget> createState() {
     return _QuizmainState();
@@ -23,6 +26,58 @@ class Quizmain extends StatefulWidget {
 class _QuizmainState extends State<Quizmain> {
   bool isError = false;
  bool isLoading = false;
+  int maxFailedLoadAttempts = 3;
+  int item = 0;
+  static final AdRequest request = AdRequest(
+    keywords: <String>['foo', 'bar'],
+    contentUrl: 'http://foo.com/bar.html',
+    nonPersonalizedAds: true,
+  );
+
+  InterstitialAd _interstitialAd;
+  int _numInterstitialLoadAttempts = 0;
+
+  RewardedAd _rewardedAd;
+  int _numRewardedLoadAttempts = 0;
+
+  BannerAd _anchoredBanner;
+  bool _loadingAnchoredBanner = false;
+
+  Future<void> _createAnchoredBanner(BuildContext context) async {
+    final AnchoredAdaptiveBannerAdSize size =
+    await AdSize.getAnchoredAdaptiveBannerAdSize(
+      Orientation.portrait,
+      MediaQuery.of(context).size.width.truncate(),
+    );
+
+    if (size == null) {
+      print('Unable to get height of anchored banner.');
+      return;
+    }
+
+    final BannerAd banner = BannerAd(
+      size: size,
+      request: request,
+      adUnitId: Platform.isAndroid
+          ? '${fbbannerid}'
+          : 'ca-app-pub-1988118332072011/9771093059',
+      listener: BannerAdListener(
+        onAdLoaded: (Ad ad) {
+          print('$BannerAd loaded.');
+          setState(() {
+            _anchoredBanner = ad as BannerAd;
+          });
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print('$BannerAd failedToLoad: $error');
+          ad.dispose();
+        },
+        onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
+        onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
+      ),
+    );
+    return banner.load();
+  }
   var _questions = [
     // {
     //   'questionText': 'Q1.Who has the highest test Ranking?',
@@ -120,12 +175,13 @@ class _QuizmainState extends State<Quizmain> {
   Widget build(BuildContext context) {
     return  Scaffold(
         appBar: AppBar(
-          title: Text('Quiz'),
+          centerTitle: true,
+          title: Text("Quiz"),
           backgroundColor: Color(lightBlue),
         ),
         body:isLoading?CircularProgressIndicator(): Stack(
           children: [
-             SvgPicture.asset("assets/icons/bg.svg", fit: BoxFit.fill,width: double.infinity,),
+           //  SvgPicture.asset("assets/icons/bg.svg", fit: BoxFit.fill,width: double.infinity,),
             // CustomDialogBox(),
             Container(
               padding: const EdgeInsets.all(30.0),

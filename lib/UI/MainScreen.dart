@@ -35,6 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   var name;
   var profileData;
   Map userfb = {};
+
   //var facebookLogin = FacebookLogin();
   int _radioValue = 1;
   GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -202,7 +203,13 @@ setState(() {
 
 });    print(";jnk;jnkasdv;jnko");
     databaseReference.once().then((DataSnapshot snapshot) {
-      print('ranking : ${snapshot.value}');
+
+      setState(() {
+        matchkey=snapshot.value['Matchkeys']['Matachapikey'];
+        fbbannerid=snapshot.value['Matchkeys']['fb_bannerkey'];
+        fbinterstetialid=snapshot.value['Matchkeys']['fb_interstitialkey'];
+        print('matchkey : ${matchkey}');
+      });
     //  print('ranking : ${snapshot.value['ImagesOdi']}');
 
 

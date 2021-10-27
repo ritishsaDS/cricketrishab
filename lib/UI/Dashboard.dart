@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:CricScore_App/UI/TestMatchdetail.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
@@ -196,7 +197,7 @@ class _DashboardState extends State<Dashboard> {
   void _createInterstitialAd() {
 
     InterstitialAd.load(
-        adUnitId: "ca-app-pub-3940256099942544/1033173712",
+        adUnitId: "${fbinterstetialid}",
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
@@ -349,8 +350,8 @@ class _DashboardState extends State<Dashboard> {
       size: size,
       request: request,
       adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
-          : 'ca-app-pub-3940256099942544/6300978111',
+          ? '${fbbannerid}'
+          : '${fbbannerid}',
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           print('$BannerAd loaded.');
@@ -521,26 +522,26 @@ if(prefs.getString("name")==null){
         height: SizeConfig.screenHeight*0.15,
         child: Column(
           children: [
-            ElevatedButton(
-              child: Row(
-                children: [
-                  Image.asset("assets/icons/facebook.png",scale: 22,),
-                  Text(' Login with Facebook'),
-                ],
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-
-                initiateFacebookLogin();
-              },
-              style: ElevatedButton.styleFrom(
-                  primary: Color(0XFF3B5998),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  textStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(height: 10,),
+            // ElevatedButton(
+            //   child: Row(
+            //     children: [
+            //       Image.asset("assets/icons/facebook.png",scale: 22,),
+            //       Text(' Login with Facebook'),
+            //     ],
+            //   ),
+            //   onPressed: () {
+            //     Navigator.pop(context);
+            //
+            //    // initiateFacebookLogin();
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //       primary: Color(0XFF3B5998),
+            //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //       textStyle: TextStyle(
+            //           fontSize: 16,
+            //           fontWeight: FontWeight.bold)),
+            // ),
+            // SizedBox(height: 10,),
             ElevatedButton(
               child: Row(
                 children: [
@@ -777,7 +778,7 @@ today=DateTime.now();
     try {
       final response = await get(
           Uri.parse(
-              'https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=runs,visitorteam,localteam,batting,bowling,league,stage,balls,firstUmpire,referee&filter[status]=Finished&filter[starts_between]=${DateTime(today.year, today.month , today.day-4).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+1).toString().substring(0,10)}&sort=starting_at'),
+              'https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,league,stage,balls,firstUmpire,referee&filter[status]=Finished&filter[starts_between]=${DateTime(today.year, today.month , today.day-4).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+1).toString().substring(0,10)}&sort=starting_at'),
          );
       print("bjkb" + response.request.url.toString());
       if (response.statusCode == 200) {
@@ -831,7 +832,7 @@ print("jhbhfddd"+livematches.length.toString());
     try {
       final response = await get(
           Uri.parse(
-              'https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=runs,visitorteam,localteam,batting,bowling,venue,league,stage,balls,firstUmpire,referee&filter[status]=NS&filter[starts_between]=${DateTime(today.year, today.month , today.day-1).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+4).toString().substring(0,10)}&sort=starting_at'),
+              'https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,venue,league,stage,balls,firstUmpire,referee&filter[status]=NS&filter[starts_between]=${DateTime(today.year, today.month , today.day-1).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+4).toString().substring(0,10)}&sort=starting_at'),
          );
       print("bjkb" + response.request.url.toString());
       if (response.statusCode == 200) {
@@ -877,7 +878,7 @@ print("jhbhfddd"+livematches.length.toString());
     try {
       final response = await get(
         Uri.parse(
-            'https://cricket.sportmonks.com/api/v2.0/livescores?api_token=3Me2w6gSy5GD9BKybwa8NPWQkT2PZ5fnfA5RLdYkPBraxSnVfSAnafoDikHu&include=lineup,runs,visitorteam,localteam,batting,bowling,league,stage'),
+            'https://cricket.sportmonks.com/api/v2.0/livescores?api_token=${matchkey}&include=lineup,runs,visitorteam,localteam,batting,bowling,league,stage'),
       );
       print("bjkb" + response.request.url.toString());
       print("bjkblive" + response.statusCode.toString());
@@ -2364,16 +2365,18 @@ print("jhbhfddd"+livematches.length.toString());
 
                     child: Text(
                       postsfromserver[i]['title'],maxLines:2, textAlign: TextAlign.justify,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),
+                      ),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.all(5),
                     child: Text(
-                        postsfromserver[i]['description'], textAlign: TextAlign.justify,maxLines:2),
+                        postsfromserver[i]['description'], textAlign: TextAlign.justify,maxLines:2,
+                        style: GoogleFonts.roboto(
+                    textStyle: TextStyle(color: Colors.black),
+                  ),),
                   )
                 ],
               ),
@@ -2463,6 +2466,7 @@ print("jhbhfddd"+livematches.length.toString());
             if (response.statusCode == 200) {
               final responseJson = json.decode(response.body);
               SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString("userid",responseJson['user']['id'].toString());
               prefs.setString("name", _userObj.displayName);
               prefs.setString("email", _userObj.email);
               prefs.setString("image", _userObj.photoUrl);

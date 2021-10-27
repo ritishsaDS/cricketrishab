@@ -196,7 +196,7 @@ Upcomingmatches.add(matches[i]);
      countdownDuration = Duration(minutes: diff);
       matchwidget.add(GestureDetector(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizmain(id:matches[i]['match_key'])));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizmain(id:matches[i]['match_key'],matchname: Upcomingmatches[i]['team_a']+" vs "+ Upcomingmatches[i]['team_b'])));
         },
         child: Container(
           padding: EdgeInsets.all(5),
@@ -370,7 +370,7 @@ Expanded(child: SizedBox()),
 
       matchwidget.add(GestureDetector(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizmain(id:Completedmatches[i]['match_key'])));
+          //Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizmain(id:Completedmatches[i]['match_key'])));
         },
         child: Container(
           padding: EdgeInsets.all(5),

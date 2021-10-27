@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class topstorydetail extends StatefulWidget{
   var image;
@@ -29,16 +30,23 @@ class _topstorydetailState extends State<topstorydetail> {
 
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+
         child: SingleChildScrollView(
           child: Column(children: [
           Image.network(widget.image),
-          Text(widget.title,  textAlign: TextAlign.justify,style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 16),),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text(widget.title,  textAlign: TextAlign.justify,style: GoogleFonts.roboto(
+              textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),
+            ),),
+          ),
           SizedBox(height: 10,),
-          Text(widget.description,textAlign: TextAlign.justify),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text(widget.description,textAlign: TextAlign.justify,style: GoogleFonts.roboto(
+              textStyle: TextStyle(color: Colors.black,),
+            )),
+          ),
       ],),
         ),),
     );
