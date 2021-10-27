@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "627011007779",
+    "project_id": "cricscore-40918",
+    "storage_bucket": "cricscore-40918.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627011007779:android:415bf199343aa21ca04896",
+        "android_client_info": {
+          "package_name": "com.digitlers.cricscore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627011007779-8uv3ncn5ltv1435dkedgb4q877s4ju7c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digitlers.cricscore",
+            "certificate_hash": "bbb6439b4c3b8095212534612f4a2202ad2a9414"
+          }
+        },
+        {
+          "client_id": "627011007779-72jptrmdff3ve84o4h50an5ofcbcvucr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt9zHrSOGhxHXlPL_uGcBFe2pL28xdIb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627011007779-72jptrmdff3ve84o4h50an5ofcbcvucr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
