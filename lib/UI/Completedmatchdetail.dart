@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 
 import 'Dashboard.dart';
 import 'Matchsquad.dart';
@@ -53,25 +53,25 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
     nonPersonalizedAds: true,
   );
   int maxFailedLoadAttempts = 3;
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
 
   void _createInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/1033173712',
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             print('$ad loaded');
             _interstitialAd = ad;
             _numInterstitialLoadAttempts = 0;
-            _interstitialAd.setImmersiveMode(true);
+            _interstitialAd!.setImmersiveMode(true);
           },
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error.');
@@ -89,7 +89,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -103,7 +103,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
   }
   @override
@@ -115,7 +115,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
   }
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -139,7 +139,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
       print('Warning: attempt to show rewarded before loaded.');
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (RewardedAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
@@ -154,15 +154,15 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
     });
     _rewardedAd = null;
   }
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -271,7 +271,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                     Container(
                         child: Column(children: [
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("SQUADS"),
@@ -292,7 +292,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                             ),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           GestureDetector(
                             onTap: (){
                               // Navigator.push(
@@ -310,7 +310,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                             ),
                           ),
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("INFO"),
@@ -323,14 +323,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Match",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['status'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -339,14 +339,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Series",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['league']['name'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -355,14 +355,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Match Type",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['type'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -371,7 +371,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Toss",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(
                                       mathesfromserver['tosswon']['name'],
@@ -379,7 +379,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -388,14 +388,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Umpires",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text("${mathesfromserver['firstumpire']==null?"":mathesfromserver['firstumpire']['fullname']}",
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
 
 
                           Container(
@@ -406,14 +406,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Venue",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text("${mathesfromserver['venue']==null?"":mathesfromserver['venue']['name'].toString()}",
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         ])),
                     Container(
                       child: Column(
@@ -659,7 +659,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -674,7 +674,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -689,7 +689,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -1265,7 +1265,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                     Container(
                         child: Column(children: [
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("SQUADS"),
@@ -1281,7 +1281,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                             ),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           GestureDetector(
                             onTap: (){
                               // Navigator.push(
@@ -1303,7 +1303,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                             ),
                           ),
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("INFO"),
@@ -1316,14 +1316,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Match",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['status'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1332,14 +1332,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Series",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['league']['name'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1348,14 +1348,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Match Type",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['type'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1364,7 +1364,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Toss",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   // Text(
                                   //     mathesfromserver['tosswon']['name'],
@@ -1372,7 +1372,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1381,14 +1381,14 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Umpires",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['firstumpire']==null?"":mathesfromserver['firstumpire']['fullname'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
 
                           Container(
                             padding: EdgeInsets.all(10),
@@ -1398,7 +1398,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 children: [
                                   Text(
                                     "Venue",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(                                mathesfromserver['venue']==null?"":mathesfromserver['venue']['name']+" , "+mathesfromserver['venue']['city'],overflow: TextOverflow.ellipsis,softWrap: true,
 
@@ -1406,7 +1406,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         ])),
                     Container(
                       child: Column(
@@ -1542,13 +1542,13 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
     }
 
   }
-  dynamic mathesfromserver=new List();
-  dynamic scorecarda=new List();
-  dynamic bowlingscorecarda=new List();
-  dynamic bowlingscorecardb=new List();
-  dynamic scorecardb=new List();
-  dynamic recentballs=new List();
-  dynamic scoredata=new List();
+  dynamic mathesfromserver=[];
+  dynamic scorecarda=[];
+  dynamic bowlingscorecarda=[];
+  dynamic bowlingscorecardb=[];
+  dynamic scorecardb=[];
+  dynamic recentballs=[];
+  dynamic scoredata=[];
   var outtypes={};
   void getmatchdetail() async {
     var url="https://cricket.sportmonks.com/api/v2.0/fixtures/${widget.id}?api_token=${matchkey}&include=balls,runs,visitorteam,localteam,batting,bowling,league,stage,manofmatch,tosswon,lineup,venue,firstUmpire";
@@ -1562,7 +1562,7 @@ class _CompletedmatchdetailState extends State<Completedmatchdetail> {
 
 
       });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
 
@@ -1625,7 +1625,7 @@ print(scorecardb);
       }
     } catch (e) {
       print(e);
-      showToast(e);
+      showToast(e.toString());
       setState(() {
         isError = true;
         isLoading = true;
@@ -1644,7 +1644,7 @@ print(scorecardb);
 
 
       });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       print("bjkb" + response.statusCode.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
@@ -1666,7 +1666,7 @@ for(int i=0; i<scoredata.length;i++){
       }
       }
   List<Widget> squadwidget() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squada.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -1735,7 +1735,7 @@ for(int i=0; i<scoredata.length;i++){
     return squadlist;
   }
   List<Widget> squadwidgetb() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squadb.length; i++) {
       squadlist.add(
           Container(
@@ -1803,7 +1803,7 @@ for(int i=0; i<scoredata.length;i++){
     return squadlist;
   }
   List<Widget> battingorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < scorecarda.length; i++) {
       squadlist.add(
           Container(
@@ -1942,7 +1942,7 @@ for(int i=0; i<scoredata.length;i++){
     return squadlist;
   }
   List<Widget> batting2ndorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < scorecardb.length; i++) {
       squadlist.add(
           Container(
@@ -2081,7 +2081,7 @@ for(int i=0; i<scoredata.length;i++){
     return squadlist;
   }
   List<Widget> bowlingorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingscorecarda.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -2191,7 +2191,7 @@ for(int i=0; i<scoredata.length;i++){
   }
 
   List<Widget> bowlingsecondorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingscorecardb.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -2309,7 +2309,7 @@ for(int i=0; i<scoredata.length;i++){
   }
 
   List <Widget>balls(){
-    List<Widget> balllist = new List();
+    List<Widget> balllist = [];
     for (int i = recentballs.length-1; i >= 0; i--) {
       balllist.add(Container(
         child: Column(

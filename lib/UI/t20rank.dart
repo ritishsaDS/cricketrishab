@@ -11,7 +11,7 @@ class T20ranking extends StatefulWidget{
 }
 
 class __T20rankingState extends State<T20ranking> {
-  var testranking=new List();
+  var testranking=[];
   var teamlength=10;
   @override
   void initState()  {
@@ -45,7 +45,7 @@ class __T20rankingState extends State<T20ranking> {
   }
 
   List<Widget> getTestRank() {
-    List<Widget> testlist=new List();
+    List<Widget> testlist=[];
     for(int i =0; i<teamlength;i++){
       print('Rank${i+1}');
       testlist.add(Container(margin: EdgeInsets.all(15),child: Row(children: [

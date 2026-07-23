@@ -1,5 +1,5 @@
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 
 class OpenBlog extends StatefulWidget {

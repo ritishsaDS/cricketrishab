@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -30,7 +30,7 @@ bool isLoading = false;
      ),
    );
   }
-  dynamic scorefromserver = new List();
+  dynamic scorefromserver = [];
   Future<void> getnextmatch() async {
     try {
       final response = await post(Uri.parse('http://13.127.190.65/api2/seriesMatches/0eeff2137825825ce7cfab876acc7c47?series_id=${widget.id}'));
@@ -69,7 +69,7 @@ bool isLoading = false;
     }
   }
 List<Widget> getEvetnts() {
-  List<Widget> productList = new List();
+  List<Widget> productList = [];
   for(int i= 0; i<scorefromserver.length;i++){
     productList.add( GestureDetector(
       onTap: (){

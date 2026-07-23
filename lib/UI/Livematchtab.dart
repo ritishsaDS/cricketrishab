@@ -13,22 +13,22 @@ class Livematchtab extends StatefulWidget{
 }
 
 class _LivematchtabState extends State<Livematchtab>  with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  TabController? _nestedTabController;
   @override
   void initState() {
-    _nestedTabController = new TabController(length: 3, vsync: this);
+    _nestedTabController = TabController(length: 3, vsync: this);
     super.initState();
   }
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
+    _nestedTabController!.dispose();
   }
-  var test = new List();
-  var one = new List();
-  var t20 = new List();
-  var upcoming = new List();
-  var recent = new List();
+  var test = [];
+  var one = [];
+  var t20 = [];
+  var upcoming = [];
+  var recent = [];
   bool isLoading=false;
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class _LivematchtabState extends State<Livematchtab>  with TickerProviderStateMi
     ),
   );
   }
-  dynamic mathesfromserver=new List();
+  dynamic mathesfromserver=[];
   void getmatches() async {
     setState(() {
       isLoading = true;

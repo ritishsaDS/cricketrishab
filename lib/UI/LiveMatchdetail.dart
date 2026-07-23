@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:CricScore_App/UI/recenttabscorecard.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/recenttabscorecard.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -120,11 +120,11 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     //                                     Container(
     //                                       // width: 70,
     //                                       // height: 80,
-    //                                       // decoration: new BoxDecoration(
+    //                                       // decoration: BoxDecoration(
     //                                       //     shape: BoxShape.circle,
-    //                                       //     image: new DecorationImage(
+    //                                       //     image: DecorationImage(
     //                                       //         fit: BoxFit.fill,
-    //                                       //         image: new NetworkImage(pastmatches[i]["team_b_img"]==null?"www.google.png":pastmatches[i]["team_b_img"]
+    //                                       //         image: NetworkImage(pastmatches[i]["team_b_img"]==null?"www.google.png":pastmatches[i]["team_b_img"]
     //                                       //
     //                                       //         ))),
     //                                       child: CircleAvatar(
@@ -243,11 +243,11 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     //                                     Container(
     //                                       // width: 70,
     //                                       // height: 80,
-    //                                       // decoration: new BoxDecoration(
+    //                                       // decoration: BoxDecoration(
     //                                       //     shape: BoxShape.circle,
-    //                                       //     image: new DecorationImage(
+    //                                       //     image: DecorationImage(
     //                                       //         fit: BoxFit.fill,
-    //                                       //         image: new NetworkImage(pastmatches[i]["team_b_img"]==null?"www.google.png":pastmatches[i]["team_b_img"]
+    //                                       //         image: NetworkImage(pastmatches[i]["team_b_img"]==null?"www.google.png":pastmatches[i]["team_b_img"]
     //                                       //
     //                                       //         ))),
     //                                       child: CircleAvatar(
@@ -746,7 +746,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     //                             Divider(
     //                               height: 15,
     //                               thickness: 1.5,
-    //                               color: Colors.grey[300],
+    //                               color: Colors.grey[300]!,
     //                             ),
     //                             Container(
     //                                 alignment: Alignment.bottomCenter,
@@ -769,7 +769,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     //                             Divider(
     //                               height: 15,
     //                               thickness: 1.5,
-    //                               color: Colors.grey[300],
+    //                               color: Colors.grey[300]!,
     //                             ),
     //                           ],
     //                         ),
@@ -1182,7 +1182,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                   Container(
                       child: Column(children: [
                         Container(
-                          color: Colors.grey[300],
+                          color: Colors.grey[300]!,
                           padding: EdgeInsets.all(10),
                           width: SizeConfig.screenWidth,
                           child: Text("SQUADS"),
@@ -1203,7 +1203,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                           ),
                         ),
                         Divider(
-                            height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         GestureDetector(
                           onTap: (){
                             // Navigator.push(
@@ -1221,7 +1221,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                           ),
                         ),
                         Container(
-                          color: Colors.grey[300],
+                          color: Colors.grey[300]!,
                           padding: EdgeInsets.all(10),
                           width: SizeConfig.screenWidth,
                           child: Text("INFO"),
@@ -1234,14 +1234,14 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                               children: [
                                 Text(
                                   "Match",
-                                  style: TextStyle(color: Colors.grey[700]),
+                                  style: TextStyle(color: Colors.grey[700]!),
                                 ),
                                 Text(scorefromserver['status'],
                                     style: TextStyle(color: Colors.black))
                               ]),
                         ),
                         Divider(
-                            height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         Container(
                           padding: EdgeInsets.all(10),
                           width: SizeConfig.screenWidth,
@@ -1250,14 +1250,14 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                               children: [
                                 Text(
                                   "Series",
-                                  style: TextStyle(color: Colors.grey[700]),
+                                  style: TextStyle(color: Colors.grey[700]!),
                                 ),
                                 Text(scorefromserver['league']['name'],
                                     style: TextStyle(color: Colors.black))
                               ]),
                         ),
                         Divider(
-                            height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         Container(
                           padding: EdgeInsets.all(10),
                           width: SizeConfig.screenWidth,
@@ -1266,14 +1266,14 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                               children: [
                                 Text(
                                   "Match Type",
-                                  style: TextStyle(color: Colors.grey[700]),
+                                  style: TextStyle(color: Colors.grey[700]!),
                                 ),
                                 Text(scorefromserver['type'],
                                     style: TextStyle(color: Colors.black))
                               ]),
                         ),
                         Divider(
-                            height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         Container(
                           padding: EdgeInsets.all(10),
                           width: SizeConfig.screenWidth,
@@ -1282,7 +1282,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                               children: [
                                 Text(
                                   "Toss",
-                                  style: TextStyle(color: Colors.grey[700]),
+                                  style: TextStyle(color: Colors.grey[700]!),
                                 ),
                                 Text(
                                     scorefromserver['tosswon']==null?"": scorefromserver['tosswon']['name'],
@@ -1290,7 +1290,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                               ]),
                         ),
                         Divider(
-                            height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         Container(
                           padding: EdgeInsets.all(10),
                           width: SizeConfig.screenWidth,
@@ -1299,14 +1299,14 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                               children: [
                                 Text(
                                   "Umpires",
-                                  style: TextStyle(color: Colors.grey[700]),
+                                  style: TextStyle(color: Colors.grey[700]!),
                                 ),
                                 // Text(scorefromserver['firstumpire']['fullname'],
                                 //     style: TextStyle(color: Colors.black))
                               ]),
                         ),
                         Divider(
-                            height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            height: 5, thickness: 1.5, color: Colors.grey[200]!),
 
 
                         Container(
@@ -1317,14 +1317,14 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                               children: [
                                 Text(
                                   "Venue",
-                                  style: TextStyle(color: Colors.grey[700]),
+                                  style: TextStyle(color: Colors.grey[700]!),
                                 ),
                                 Text("${scorefromserver['venue']==null?"":scorefromserver['venue']['name'].toString()}",
                                     style: TextStyle(color: Colors.black))
                               ]),
                         ),
                         Divider(
-                            height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       ])),
                   Container(
                     child: Column(
@@ -2160,7 +2160,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                         //       Container(
                         //           decoration: BoxDecoration(
                         //             shape: BoxShape.circle,
-                        //             color: Colors.grey[400],
+                        //             color: Colors.grey[400]!,
                         //           ),
                         //           padding: EdgeInsets.all(4),
                         //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -2175,7 +2175,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                         //       Container(
                         //           decoration: BoxDecoration(
                         //             shape: BoxShape.circle,
-                        //             color: Colors.grey[400],
+                        //             color: Colors.grey[400]!,
                         //           ),
                         //           padding: EdgeInsets.all(4),
                         //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -2190,7 +2190,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
                         //       Container(
                         //           decoration: BoxDecoration(
                         //             shape: BoxShape.circle,
-                        //             color: Colors.grey[400],
+                        //             color: Colors.grey[400]!,
                         //           ),
                         //           padding: EdgeInsets.all(4),
                         //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -3151,22 +3151,22 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     
   }
 
-  dynamic scorefromserver = new List();
-  var Commentary = new List();
+  dynamic scorefromserver = [];
+  var Commentary = [];
   var teamaid;
   var squada=[];
   var squadb=[];
   var teambid;
- // dynamic scorefromserver=new List();
-  dynamic scorecarda=new List();
-  dynamic scorecardc=new List();
-  dynamic scorecardd=new List();
-  dynamic bowlingscorecarda=new List();
-  dynamic bowlingscorecardb=new List();
-  dynamic bowlingscorecardc=new List();
-  dynamic bowlingscorecardd=new List();
-  dynamic scorecardb=new List();
-  dynamic recentballs=new List();
+ // dynamic scorefromserver=[];
+  dynamic scorecarda=[];
+  dynamic scorecardc=[];
+  dynamic scorecardd=[];
+  dynamic bowlingscorecarda=[];
+  dynamic bowlingscorecardb=[];
+  dynamic bowlingscorecardc=[];
+  dynamic bowlingscorecardd=[];
+  dynamic scorecardb=[];
+  dynamic recentballs=[];
   var Striker;
   var Strikerruns;
   var Strikerballs;
@@ -3183,7 +3183,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
   dynamic scoredata=[];
   var outtypes={};
   var nonStrikerrate;
-  dynamic nonstriker=new List();
+  dynamic nonstriker=[];
   var coiunter=0;
   void getlivescore() async {
     setState(() {
@@ -3193,7 +3193,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     try {
       final response = await get(Uri.parse(url));
 
-      print("bjkbjjj" + response.request.url.toString());
+      print("bjkbjjj" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
 
@@ -3336,7 +3336,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
 
 
   List<Widget> squadwidget() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squada.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -3405,7 +3405,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return squadlist;
   }
   List<Widget> squadwidgetb() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squadb.length; i++) {
       squadlist.add(
           Container(
@@ -3473,7 +3473,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return squadlist;
   }
   List<Widget> battingorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < scorecarda.length; i++) {
       squadlist.add(
           Container(
@@ -3613,7 +3613,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return squadlist;
   }
   List<Widget> batting2ndorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < scorecardb.length; i++) {
       squadlist.add(
           Container(
@@ -3752,7 +3752,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return squadlist;
   }
   List<Widget> batting3order() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < scorecardc.length; i++) {
       squadlist.add(
           Container(
@@ -3892,7 +3892,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return squadlist;
   }
   List<Widget> batting4ndorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < scorecardd.length; i++) {
       squadlist.add(
           Container(
@@ -4031,7 +4031,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return squadlist;
   }
   List<Widget> bowlingorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingscorecarda.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -4141,7 +4141,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
   }
 
   List<Widget> bowlingsecondorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingscorecardb.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -4258,7 +4258,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
     return squadlist;
   }
   List<Widget> bowlingthirdorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingscorecardc.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -4368,7 +4368,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
   }
 
   List<Widget> bowlingfourthorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingscorecardd.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -4486,7 +4486,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
   }
 
   List <Widget>balls(){
-    List<Widget> balllist = new List();
+    List<Widget> balllist = [];
     for (int i = recentballs.length-1; i >= 0; i--) {
       balllist.add(Container(
         child: Column(
@@ -4530,7 +4530,7 @@ class _LiveMatchdetailState extends State<LiveMatchdetail> {
 
 
       });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       print("bjkb" + response.statusCode.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);

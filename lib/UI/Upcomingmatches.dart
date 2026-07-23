@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
-import 'package:CricScore_App/UI/Completedmatchdetail.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Completedmatchdetail.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
@@ -50,13 +50,13 @@ class _UpcomingtabState extends State<Twenty> {
     nonPersonalizedAds: true,
   );
 
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
   bool isError=false;
   bool isLoading=false;
@@ -65,14 +65,14 @@ class _UpcomingtabState extends State<Twenty> {
   var today;
   void _createInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/1033173712',
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             print('$ad loaded');
             _interstitialAd = ad;
             _numInterstitialLoadAttempts = 0;
-            _interstitialAd.setImmersiveMode(true);
+            _interstitialAd!.setImmersiveMode(true);
           },
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error.');
@@ -90,7 +90,7 @@ class _UpcomingtabState extends State<Twenty> {
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -104,7 +104,7 @@ class _UpcomingtabState extends State<Twenty> {
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
   }
   @override
@@ -116,7 +116,7 @@ class _UpcomingtabState extends State<Twenty> {
   }
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -140,7 +140,7 @@ class _UpcomingtabState extends State<Twenty> {
       print('Warning: attempt to show rewarded before loaded.');
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (RewardedAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
@@ -155,15 +155,15 @@ class _UpcomingtabState extends State<Twenty> {
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
     });
     _rewardedAd = null;
   }
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -254,9 +254,9 @@ class _UpcomingtabState extends State<Twenty> {
           if (_anchoredBanner != null)
             Container(
               color: Colors.green,
-              width: _anchoredBanner.size.width.toDouble(),
-              height: _anchoredBanner.size.height.toDouble(),
-              child: AdWidget(ad: _anchoredBanner),
+              width: _anchoredBanner!.size.width.toDouble(),
+              height: _anchoredBanner!.size.height.toDouble(),
+              child: AdWidget(ad: _anchoredBanner!),
             ),
         ],
       ),
@@ -267,7 +267,7 @@ class _UpcomingtabState extends State<Twenty> {
     ));
 
   }
-  dynamic mathesfromserver=new List();
+  dynamic mathesfromserver=[];
   var loacalteamid;
   var visitorteamid;
   void getmatches() async {
@@ -282,14 +282,14 @@ class _UpcomingtabState extends State<Twenty> {
       url='https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=venue,runs,visitorteam,localteam,batting,bowling,league,season,stage&sort=starting_at&filter[status]=NS&filter[type]=T20,T20I&sort=starting_at';
     }
     SharedPreferences prefs=await SharedPreferences.getInstance();
-    var newDate = new DateTime(selectedDate.year, selectedDate.month , selectedDate.day+1);
+    var newDate = DateTime(selectedDate.year, selectedDate.month , selectedDate.day+1);
     print(newDate);
     try {
       final response = await http.get(Uri.parse(url),headers: {
-        "rs-token":prefs.getString("token")
+        "rs-token":prefs.getString("token") ?? ""
 
       });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
         mathesfromserver=responseJson['data'];
@@ -326,7 +326,7 @@ class _UpcomingtabState extends State<Twenty> {
     }
   }
   List<Widget> getEvetnts() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     if(widget.status=="recent"){
       for(int i= mathesfromserver.length-1; i>=0;i--){
          loacalteamid=mathesfromserver[i]['localteam_id'];

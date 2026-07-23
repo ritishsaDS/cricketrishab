@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:CricScore_App/UI/Notlivematch.dart';
-import 'package:CricScore_App/UI/Livematches.dart';
-import 'package:CricScore_App/UI/Oneday.dart';
-import 'package:CricScore_App/UI/recenttabscorecard.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Notlivematch.dart';
+import 'package:cricscore_app/UI/Livematches.dart';
+import 'package:cricscore_app/UI/Oneday.dart';
+import 'package:cricscore_app/UI/recenttabscorecard.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,16 +17,16 @@ class NestedTabBar extends StatefulWidget {
 }
 class _NestedTabBarState extends State<NestedTabBar>
     with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  TabController? _nestedTabController;
   @override
   void initState() {
     super.initState();
-    _nestedTabController = new TabController(length: 3, vsync: this);
+    _nestedTabController = TabController(length: 3, vsync: this);
   }
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
+    _nestedTabController!.dispose();
   }
   @override
   Widget build(BuildContext context) {

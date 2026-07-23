@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:CricScore_App/UI/Notlivematch.dart';
-import 'package:CricScore_App/UI/Oneday.dart';
-import 'package:CricScore_App/UI/T20.dart';
-import 'package:CricScore_App/UI/recenttabscorecard.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Notlivematch.dart';
+import 'package:cricscore_app/UI/Oneday.dart';
+import 'package:cricscore_app/UI/T20.dart';
+import 'package:cricscore_app/UI/recenttabscorecard.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -78,13 +78,13 @@ indicatorColor: Colors.white,
 
   }
 
-  dynamic mathesfromserver = new List();
+  dynamic mathesfromserver = [];
   void getmatches() async {
     setState(() {
       isLoading = true;
     });
 
-    var newDate = new DateTime(
+    var newDate = DateTime(
         selectedDate.year, selectedDate.month, selectedDate.day - 2);
     print(newDate);
     try {
@@ -126,7 +126,7 @@ indicatorColor: Colors.white,
   }
 
   List<Widget> getEvetnts() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     for (int i = 0; i < pastmatches.length; i++) {
       productList.add(
         GestureDetector(
@@ -300,11 +300,11 @@ indicatorColor: Colors.white,
                             Container(
                               // width: 70,
                               // height: 80,
-                              // decoration: new BoxDecoration(
+                              // decoration: BoxDecoration(
                               //     shape: BoxShape.circle,
-                              //     image: new DecorationImage(
+                              //     image: DecorationImage(
                               //         fit: BoxFit.fill,
-                              //         image: new NetworkImage(pastmatches[i]["team_b_img"]==null?"www.google.png":pastmatches[i]["team_b_img"]
+                              //         image: NetworkImage(pastmatches[i]["team_b_img"]==null?"www.google.png":pastmatches[i]["team_b_img"]
                               //
                               //         ))),
                               child: CircleAvatar(

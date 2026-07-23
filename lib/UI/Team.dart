@@ -1,11 +1,11 @@
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 
 import 'Teamdetail.dart';
 
 class Teams extends StatefulWidget {
-  const Teams({Key key}) : super(key: key);
+  const Teams({super.key});
 
   @override
   _TeamsState createState() => _TeamsState();
@@ -242,7 +242,7 @@ class _TeamsState extends State<Teams> {
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.grey[200],
+                                color: Colors.grey[200]!,
                                 spreadRadius: 3.0,
                                 blurRadius: 5.0)
                           ]),

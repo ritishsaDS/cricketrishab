@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 
 import 'Playerdetail.dart';
 class Matchsquad extends StatefulWidget{
@@ -15,7 +15,7 @@ class Matchsquad extends StatefulWidget{
 }
 
 class _MatchsquadState extends State<Matchsquad>   with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _MatchsquadState extends State<Matchsquad>   with SingleTickerProviderStat
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    _tabController!.dispose();
   }
 
   @override
@@ -43,7 +43,7 @@ class _MatchsquadState extends State<Matchsquad>   with SingleTickerProviderStat
                   margin: EdgeInsets.all(10),
                   height: 45,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.grey[300]!,
                     borderRadius: BorderRadius.circular(
                       25.0,
                     ),
@@ -111,7 +111,7 @@ SizedBox(height: 10,),
           );
   }
   List<Widget> squadwidget() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < widget.firstsquad.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -181,7 +181,7 @@ SizedBox(height: 10,),
     return squadlist;
   }
   List<Widget> squadwidgetb() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < widget.secondsquad.length; i++) {
       squadlist.add(
           Container(

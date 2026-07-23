@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/UI/MainScreen.dart';
+import 'package:cricscore_app/UI/MainScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'UI/Dashboard.dart';
@@ -12,7 +12,7 @@ class Splash extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<Splash> {
-  final databaseReference = FirebaseDatabase.instance.reference();
+  final databaseReference = FirebaseDatabase.instance.ref();
   @override
   void initState() {
     super.initState();
@@ -35,12 +35,12 @@ class _MyHomePageState extends State<Splash> {
   Future<void> readData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    databaseReference.once().then((DataSnapshot snapshot) {
+    databaseReference.get().then((DataSnapshot snapshot) {
 
       setState(() {
-        matchkey=snapshot.value['Matchkeys']['Matachapikey'];
-        fbbannerid=snapshot.value['Matchkeys']['fb_bannerkey'];
-        fbinterstetialid=snapshot.value['Matchkeys']['fb_interstitialkey'];
+        matchkey=(snapshot.value as Map)['Matchkeys']['Matachapikey'];
+        fbbannerid=(snapshot.value as Map)['Matchkeys']['fb_bannerkey'];
+        fbinterstetialid=(snapshot.value as Map)['Matchkeys']['fb_interstitialkey'];
         print('matchkey : ${matchkey}');
       });
       Timer(Duration(seconds: 1),

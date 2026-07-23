@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/UI/Notlivematch.dart';
-import 'package:CricScore_App/UI/Livematches.dart';
-import 'package:CricScore_App/UI/Recenttab.dart';
-import 'package:CricScore_App/UI/recenttabscorecard.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
+import 'package:cricscore_app/UI/Notlivematch.dart';
+import 'package:cricscore_app/UI/Livematches.dart';
+import 'package:cricscore_app/UI/Recenttab.dart';
+import 'package:cricscore_app/UI/recenttabscorecard.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Oneday.dart';
@@ -20,25 +20,25 @@ class RecentMatches extends StatefulWidget {
 }
 class _NestedTabBarState extends State<RecentMatches>
     with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  TabController? _nestedTabController;
   bool isError = false;
   bool isLoading =false;
   var today=DateTime.now();
-  var test=new List();
-  var one=new List();
-  var t20=new List();
-  var upcoming =new List();
-  var recent = new List();
+  var test=[];
+  var one=[];
+  var t20=[];
+  var upcoming =[];
+  var recent = [];
   @override
   void initState() {
     getmatches();
     super.initState();
-    _nestedTabController = new TabController(length: 3, vsync: this);
+    _nestedTabController = TabController(length: 3, vsync: this);
   }
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
+    _nestedTabController!.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ backgroundColor: Colors.lightBlue,
       ),
     );
   }
-  // dynamic mathesfromserver=new List();
+  // dynamic mathesfromserver=[];
   // void getmatches() async {
   //   setState(() {
   //     isLoading = true;
@@ -108,7 +108,7 @@ backgroundColor: Colors.lightBlue,
   //   }
   // }
 
-  dynamic mathesfromserver=new List();
+  dynamic mathesfromserver=[];
   void getmatches() async {
     setState(() {
       isLoading=true;
@@ -122,7 +122,7 @@ backgroundColor: Colors.lightBlue,
             // "rs-token":prefs.getString("token")
 
           });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
         //print("jhebild"+responseJson.length);

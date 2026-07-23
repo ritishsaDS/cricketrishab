@@ -1,8 +1,8 @@
-import 'package:CricScore_App/UI/Odiranking.dart';
-import 'package:CricScore_App/UI/Testranking.dart';
-import 'package:CricScore_App/UI/t20rank.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Odiranking.dart';
+import 'package:cricscore_app/UI/Testranking.dart';
+import 'package:cricscore_app/UI/t20rank.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class Womenranking extends StatefulWidget {
 
 class _WomenrankingState extends State<Womenranking>
     with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  TabController? _nestedTabController;
   bool isLoading=false;
   bool isError=false;
 
@@ -28,22 +28,22 @@ class _WomenrankingState extends State<Womenranking>
   var  ODIimage=[];
   var  T20=[];
   var t20image=[];
-  final databaseReference = FirebaseDatabase.instance.reference();
+  final databaseReference = FirebaseDatabase.instance.ref();
   @override
   void initState() {
     super.initState();
     getranking();
     readData();
-    _nestedTabController = new TabController(length: 2, vsync: this);
+    _nestedTabController = TabController(length: 2, vsync: this);
   }
   void readData() {
-    databaseReference.once().then((DataSnapshot snapshot) {
-      print('ranking : ${snapshot.value['Mens20']}');
-      print('ranking : ${snapshot.value['ImagesOdi']}');
-      T20.add(snapshot.value['Womens20']);
-      t20image.add(snapshot.value['Womens20images']);
-      ODI.add(snapshot.value['Womensodi']);
-      ODIimage.add(snapshot.value['womensOdi']);
+    databaseReference.get().then((DataSnapshot snapshot) {
+      print('ranking : ${(snapshot.value as Map)['Mens20']}');
+      print('ranking : ${(snapshot.value as Map)['ImagesOdi']}');
+      T20.add((snapshot.value as Map)['Womens20']);
+      t20image.add((snapshot.value as Map)['Womens20images']);
+      ODI.add((snapshot.value as Map)['Womensodi']);
+      ODIimage.add((snapshot.value as Map)['womensOdi']);
 
 
     });}
@@ -51,7 +51,7 @@ class _WomenrankingState extends State<Womenranking>
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
+    _nestedTabController!.dispose();
   }
 
   @override
@@ -96,14 +96,14 @@ class _WomenrankingState extends State<Womenranking>
       ),
     );
   }
-  dynamic scorefromserver=new List();
+  dynamic scorefromserver=[];
   void getranking() async {
     // print("jkejksdjk"+selectedDate.toString());
     setState(() {
       isLoading=true;
       //  print(selectedDate.toString());
     });
-    // var newDate = new DateTime(selectedDate.year, selectedDate.month , selectedDate.day-2);
+    // var newDate = DateTime(selectedDate.year, selectedDate.month , selectedDate.day-2);
     //  print(newDate);
         {
       final uri = 'https://cricket.sportmonks.com/api/v2.0/team-rankings';

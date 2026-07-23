@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/UI/Oneday.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
+import 'package:cricscore_app/UI/Oneday.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
 
 import 'Livematches.dart';
 import 'Recenttab.dart';

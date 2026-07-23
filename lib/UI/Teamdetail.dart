@@ -1,4 +1,4 @@
-import 'package:CricScore_App/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class Teamsquad extends StatefulWidget{
@@ -43,7 +43,7 @@ class _TeamsquadState extends State<Teamsquad> {
   );
   }
   List<Widget>showplayer(){
-    List<Widget> testlist=new List();
+    List<Widget> testlist=[];
     for(int i=0; i<split.length;i++){
       testlist.add(
         Container(margin: EdgeInsets.all(10),
@@ -60,7 +60,7 @@ class _TeamsquadState extends State<Teamsquad> {
            Divider(
              thickness: 1.5,
              height: 5,
-             color: Colors.grey[200],
+             color: Colors.grey[200]!,
            )
             ],
           ),

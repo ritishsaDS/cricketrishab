@@ -6,25 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ANswer.dart';
 import 'Question.dart';
 import 'Result.dart';
-double progressValue;
+double progressValue = 0.0;
 class Quiz extends StatefulWidget {
   dynamic questions;
-  int questionIndex;
-  final Function answerQuestion;
+  int? questionIndex;
+  final Function? answerQuestion;
   var length;
 
   Quiz({
      this.questions,
     this.length,
-     this.answerQuestion,
-     this.questionIndex,
+     this.answerQuestion, this.questionIndex,
   });
 
   @override
@@ -32,7 +31,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  bool _loading;
+  bool? _loading;
 Color buttoncolor=Color(lightBlue);
 Color buttoncolor2=Color(lightBlue);
 Color buttoncolor3=Color(lightBlue);
@@ -47,17 +46,17 @@ var chooseoption;
     nonPersonalizedAds: true,
   );
 
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -101,7 +100,7 @@ var chooseoption;
   }
   void _updateProgress() {
     const oneSec = const Duration(seconds: 1);
-    new Timer.periodic(oneSec, (Timer t) {
+    Timer.periodic(oneSec, (Timer t) {
       setState(() {
         progressValue += 0.1;
         // we "finish" downloading here
@@ -110,7 +109,7 @@ var chooseoption;
           t.cancel();
           print('length'+(widget.length-1).toString());
           setState(() {
-            if ( widget.questionIndex< widget.length-1) {
+            if ((widget.questionIndex ?? 0) < (widget.length - 1)) {
               print(quesyinindex);
              // widget.questionIndex=widget.questionIndex+1;
               quesyinindex= widget.questionIndex;
@@ -144,11 +143,11 @@ var chooseoption;
     children: [
       // LinearProgressIndicator(
       //   backgroundColor: Colors.cyanAccent,
-      //   valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+      //   valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
       //   value: progressValue,
       // ),
         Question(
-          "Q-"+(widget.questionIndex+1).toString()+") "+widget.questions[widget.questionIndex]['questions'],
+          "Q-" + ((widget.questionIndex ?? 0) + 1).toString() + ") " + widget.questions[widget.questionIndex]['questions'],
         ), //Question
       Container(
         width: double.infinity,
@@ -195,7 +194,7 @@ var chooseoption;
 
             ),
             //onTap:widget.selectHandler
-        ), //RaisedButton
+        ), //ElevatedButton
       ),
       SizedBox(height: 10,),
       Container(
@@ -243,7 +242,7 @@ var chooseoption;
 
           ),
           //onTap:widget.selectHandler
-        ), //RaisedButton
+        ), //ElevatedButton
       ),
       SizedBox(height: 10,),
       Container(
@@ -291,7 +290,7 @@ var chooseoption;
 
           ),
           //onTap:widget.selectHandler
-        ), //RaisedButton
+        ), //ElevatedButton
       ),
       SizedBox(height: 10,),
       Container(
@@ -339,7 +338,7 @@ var chooseoption;
 
           ),
           //onTap:widget.selectHandler
-        ), //RaisedButton
+        ), //ElevatedButton
       ),
        SizedBox(
          height: 80,
@@ -385,7 +384,7 @@ width: SizeConfig.screenWidth*0.2,
 
             ),
             //onTap:widget.selectHandler
-          ), //RaisedButton
+          ), //ElevatedButton
         ),
       ),
         Expanded(child: SizedBox(),)
@@ -393,9 +392,9 @@ width: SizeConfig.screenWidth*0.2,
       if (_anchoredBanner != null)
         Container(
           color: Colors.green,
-          width: _anchoredBanner.size.width.toDouble(),
-          height: _anchoredBanner.size.height.toDouble(),
-          child: AdWidget(ad: _anchoredBanner),),
+          width: _anchoredBanner!.size.width.toDouble(),
+          height: _anchoredBanner!.size.height.toDouble(),
+          child: AdWidget(ad: _anchoredBanner!),),
         // ...(widget.questions[widget.questionIndex]['optionA']).map((answer) {
         //   return Answer(() => widget.answerQuestion(answer['score']), answer['text']);
         // }).toList()
@@ -434,7 +433,7 @@ width: SizeConfig.screenWidth*0.2,
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Result(40,_resetQuiz)));
             }
             else{
-            widget.questionIndex=widget.questionIndex+1;
+            widget.questionIndex = (widget.questionIndex ?? 0) + 1;
             setState(() {
             chooseoption=null;
             });
@@ -474,8 +473,8 @@ class LinearProgressIndicatorApp extends StatefulWidget {
 }
 
 class LinearProgressIndicatorAppState extends State<LinearProgressIndicatorApp> {
-  bool _loading;
-  double _progressValue;
+  bool? _loading;
+  double _progressValue = 0.0;
 
   @override
   void initState() {
@@ -486,7 +485,7 @@ class LinearProgressIndicatorAppState extends State<LinearProgressIndicatorApp> 
   }
   void _updateProgress() {
     const oneSec = const Duration(seconds: 1);
-    new Timer.periodic(oneSec, (Timer t) {
+    Timer.periodic(oneSec, (Timer t) {
       setState(() {
         _progressValue += 0.1;
         // we "finish" downloading here
@@ -507,13 +506,13 @@ class LinearProgressIndicatorAppState extends State<LinearProgressIndicatorApp> 
       body: Center(
         child: Container(
           padding: EdgeInsets.all(12.0),
-          child: _loading
+          child: _loading!
               ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               LinearProgressIndicator(
                 backgroundColor: Colors.cyanAccent,
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
                 value: _progressValue,
               ),
               Text('${(_progressValue * 100).round()}%'),
@@ -525,7 +524,7 @@ class LinearProgressIndicatorAppState extends State<LinearProgressIndicatorApp> 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            _loading = !_loading;
+            _loading = !_loading!;
             _updateProgress();
           });
         },

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:CricScore_App/UI/Matchsquad.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Matchsquad.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +32,7 @@ class _NotLivematchState extends State<NotLivematch> {
   bool isLoading = false;
   var teama;
   var teamb;
-  //final GlobalKey<ExpansionTile> expansionTile = new GlobalKey();
+  //final GlobalKey<ExpansionTile> expansionTile = GlobalKey();
 
   bool scoreboard = false;
   var map;
@@ -69,6 +69,9 @@ class _NotLivematchState extends State<NotLivematch> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    if (widget.status != 'not_started') {
+      return const SizedBox.shrink();
+    }
     if (widget.status == 'not_started') {
       return MaterialApp(
           theme: ThemeData(
@@ -120,7 +123,7 @@ class _NotLivematchState extends State<NotLivematch> {
                           color: Colors.blue,
                         ): Column(children: [
                       Container(
-                        color: Colors.grey[300],
+                        color: Colors.grey[300]!,
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
                         child: Text("SQUADS"),
@@ -146,7 +149,7 @@ class _NotLivematchState extends State<NotLivematch> {
                         ),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       GestureDetector(
                         onTap: (){
                           Navigator.push(
@@ -169,7 +172,7 @@ class _NotLivematchState extends State<NotLivematch> {
                         ),
                       ),
                       Container(
-                        color: Colors.grey[300],
+                        color: Colors.grey[300]!,
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
                         child: Text("INFO"),
@@ -182,14 +185,14 @@ class _NotLivematchState extends State<NotLivematch> {
                             children: [
                               Text(
                                 "Match",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(mathesfromserver['sub_title'],
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -198,14 +201,14 @@ class _NotLivematchState extends State<NotLivematch> {
                             children: [
                               Text(
                                 "Series",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(widget.shortname,
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -214,14 +217,14 @@ class _NotLivematchState extends State<NotLivematch> {
                             children: [
                               Text(
                                 "Match Type",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(mathesfromserver['format'],
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -230,14 +233,14 @@ class _NotLivematchState extends State<NotLivematch> {
                             children: [
                               Text(
                                 "Toss",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               // Text("${mathesfromserver['toss']['winner']=='a'?teama:teamb } opted to ${mathesfromserver['toss']['elected']}",
                               //     style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -246,14 +249,14 @@ class _NotLivematchState extends State<NotLivematch> {
                             children: [
                               Text(
                                 "Umpires",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text("Richard Kettlebrough",
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -262,14 +265,14 @@ class _NotLivematchState extends State<NotLivematch> {
                             children: [
                               Text(
                                 "Refree",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text("Chris Broad",
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -278,14 +281,14 @@ class _NotLivematchState extends State<NotLivematch> {
                             children: [
                               Text(
                                 "Venue",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(mathesfromserver['venue']['name'],
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                     ])),
                     Container(
                       child: Column(
@@ -454,7 +457,7 @@ class _NotLivematchState extends State<NotLivematch> {
                     Container(
                         child: Column(children: [
                       Container(
-                        color: Colors.grey[300],
+                        color: Colors.grey[300]!,
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
                         child: Text("SQUADS"),
@@ -480,7 +483,7 @@ onTap: (){
                         ),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       GestureDetector(
                         onTap: (){
                           Navigator.push(
@@ -503,7 +506,7 @@ onTap: (){
                         ),
                       ),
                       Container(
-                        color: Colors.grey[300],
+                        color: Colors.grey[300]!,
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
                         child: Text("INFO"),
@@ -516,14 +519,14 @@ onTap: (){
                             children: [
                               Text(
                                 "Match",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(mathesfromserver['sub_title'],
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -532,14 +535,14 @@ onTap: (){
                             children: [
                               Text(
                                 "Series",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(widget.shortname,
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -548,14 +551,14 @@ onTap: (){
                             children: [
                               Text(
                                 "Match Type",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(mathesfromserver['format'],
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -564,7 +567,7 @@ onTap: (){
                             children: [
                               Text(
                                 "Toss",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(
                                   "${mathesfromserver['toss']['winner'] == 'a' ? teama : teamb} opted to ${mathesfromserver['toss']['elected']}",
@@ -572,7 +575,7 @@ onTap: (){
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -581,14 +584,14 @@ onTap: (){
                             children: [
                               Text(
                                 "Umpires",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text("Richard Kettlebrough",
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -597,14 +600,14 @@ onTap: (){
                             children: [
                               Text(
                                 "Refree",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text("Chris Broad",
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: SizeConfig.screenWidth,
@@ -613,14 +616,14 @@ onTap: (){
                             children: [
                               Text(
                                 "Venue",
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: Colors.grey[700]!),
                               ),
                               Text(mathesfromserver['venue']['name'],
                                   style: TextStyle(color: Colors.black))
                             ]),
                       ),
                       Divider(
-                          height: 5, thickness: 1.5, color: Colors.grey[200]),
+                          height: 5, thickness: 1.5, color: Colors.grey[200]!),
                     ])),
                     Container(
                       child: Column(
@@ -839,7 +842,7 @@ onTap: (){
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -854,7 +857,7 @@ onTap: (){
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -869,7 +872,7 @@ onTap: (){
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -1408,11 +1411,11 @@ onTap: (){
                 ),
               )));
     }
-
+    return const SizedBox.shrink();
   }
 
   List<Widget> squadwidget() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squada.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -1478,7 +1481,7 @@ onTap: (){
   }
 
   List<Widget> battingorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < battingorderfirst.length; i++) {
       squadlist.add(
           Container(
@@ -1622,7 +1625,7 @@ onTap: (){
   }
 
   List<Widget> batting2ndorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < battingordersecond.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -1761,7 +1764,7 @@ onTap: (){
     return squadlist;
   }
   List<Widget> bowlingorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingorder.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -1903,7 +1906,7 @@ onTap: (){
   }
 
   List<Widget> bowlingsecondorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingordersecond.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -2045,7 +2048,7 @@ onTap: (){
   }
 
   List<Widget> squadwidgetb() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squadb.length; i++) {
       squadlist.add(
           Container(
@@ -2111,11 +2114,11 @@ onTap: (){
     return squadlist;
   }
 
-  dynamic mathesfromserver = new List();
-  dynamic battingorderfirst = new List();
-  dynamic battingordersecond = new List();
-  dynamic bowlingorder = new List();
-  dynamic bowlingordersecond = new List();
+  dynamic mathesfromserver = [];
+  dynamic battingorderfirst = [];
+  dynamic battingordersecond = [];
+  dynamic bowlingorder = [];
+  dynamic bowlingordersecond = [];
   void getfeaturedmatches() async {
     setState(() {
       isLoading = true;
@@ -2126,8 +2129,8 @@ onTap: (){
       final response = await get(
           Uri.parse(
               'https://api.sports.roanuz.com/v5/cricket/RS_P_1415363533180375074/match/${widget.match['key']}/'),
-          headers: {"rs-token": prefs.getString("token")});
-      print("bjkb" + response.request.url.toString());
+          headers: {"rs-token": prefs.getString("token") ?? ""});
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
         setState(() {

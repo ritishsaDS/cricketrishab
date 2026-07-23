@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'Quizclass.dart';
 class Answer extends StatefulWidget {
   final Function selectHandler;
@@ -31,8 +31,8 @@ class _AnswerState extends State<Answer> {
           child: Text(widget.answerText,style: TextStyle(fontSize: 16,color: Colors.white,),),
 
         ),
-        onTap:widget.selectHandler
-      ), //RaisedButton
+        onTap: () => widget.selectHandler()
+      ), //ElevatedButton
     ); //Container
   }
 }

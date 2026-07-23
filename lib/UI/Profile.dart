@@ -1,10 +1,10 @@
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key key}) : super(key: key);
+  const Profile({super.key});
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -12,7 +12,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
 
-  Gender selectedGender;
+  Gender? selectedGender;
   List<Gender> genders = <Gender>[
     const Gender(gender: 'Male'),
     const Gender(gender: 'Female'),
@@ -27,7 +27,7 @@ class _ProfileState extends State<Profile> {
   DateTime selectedDate = DateTime.now();
 
   selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2000),
@@ -127,7 +127,7 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(25),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey[200],
+                          color: Colors.grey[200]!,
                           blurRadius: 5.0,
                           spreadRadius: 3.0
                         ),
@@ -162,7 +162,7 @@ class _ProfileState extends State<Profile> {
                         borderRadius: BorderRadius.circular(25),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.grey[200],
+                              color: Colors.grey[200]!,
                               blurRadius: 5.0,
                               spreadRadius: 3.0
                           ),
@@ -197,7 +197,7 @@ class _ProfileState extends State<Profile> {
                         borderRadius: BorderRadius.circular(25),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.grey[200],
+                              color: Colors.grey[200]!,
                               blurRadius: 5.0,
                               spreadRadius: 3.0
                           ),
@@ -238,7 +238,7 @@ class _ProfileState extends State<Profile> {
                         borderRadius: BorderRadius.circular(25),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.grey[200],
+                              color: Colors.grey[200]!,
                               blurRadius: 5.0,
                               spreadRadius: 3.0
                           ),
@@ -268,7 +268,7 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           value: selectedGender,
-                          onChanged: (Gender value) {
+                          onChanged: (Gender? value) {
                             setState(() {
                               selectedGender = value;
                             });
@@ -277,7 +277,7 @@ class _ProfileState extends State<Profile> {
                             return DropdownMenuItem<Gender>(
                               value: gender,
                               child: Text(
-                                gender.gender,
+                                gender.gender ?? '',
                                 style: TextStyle(
                                     fontSize:
                                     SizeConfig.blockSizeVertical *
@@ -325,6 +325,6 @@ class _ProfileState extends State<Profile> {
 
 class Gender {
   const Gender({this.gender});
-  final String gender;
+  final String? gender;
 }
 

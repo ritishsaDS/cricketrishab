@@ -1,13 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
 
 class CustomDialogBox extends StatefulWidget {
-  final String title, descriptions, text;
-  final Image img;
+  final String? title, descriptions, text;
+  final Image? img;
 
-  const CustomDialogBox({Key key, this.title, this.descriptions, this.text, this.img}) : super(key: key);
+  const CustomDialogBox({super.key, this.title, this.descriptions, this.text, this.img});
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();

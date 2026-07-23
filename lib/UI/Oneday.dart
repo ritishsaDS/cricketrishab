@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -33,25 +33,25 @@ class _UpcomingtabState extends State<Oneday> {
     nonPersonalizedAds: true,
   );
   int maxFailedLoadAttempts = 3;
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
 
   void _createInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/1033173712',
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             print('$ad loaded');
             _interstitialAd = ad;
             _numInterstitialLoadAttempts = 0;
-            _interstitialAd.setImmersiveMode(true);
+            _interstitialAd!.setImmersiveMode(true);
           },
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error.');
@@ -69,7 +69,7 @@ class _UpcomingtabState extends State<Oneday> {
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -83,7 +83,7 @@ class _UpcomingtabState extends State<Oneday> {
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
   }
   @override
@@ -95,7 +95,7 @@ class _UpcomingtabState extends State<Oneday> {
   }
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -119,7 +119,7 @@ class _UpcomingtabState extends State<Oneday> {
       print('Warning: attempt to show rewarded before loaded.');
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (RewardedAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
@@ -134,15 +134,15 @@ class _UpcomingtabState extends State<Oneday> {
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
     });
     _rewardedAd = null;
   }
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -247,9 +247,9 @@ class _UpcomingtabState extends State<Oneday> {
             if (_anchoredBanner != null)
       Container(
       color: Colors.green,
-      width: _anchoredBanner.size.width.toDouble(),
-      height: _anchoredBanner.size.height.toDouble(),
-      child: AdWidget(ad: _anchoredBanner),)
+      width: _anchoredBanner!.size.width.toDouble(),
+      height: _anchoredBanner!.size.height.toDouble(),
+      child: AdWidget(ad: _anchoredBanner!),)
           ],
         ),
 
@@ -261,7 +261,7 @@ class _UpcomingtabState extends State<Oneday> {
     ));
 
   }
-  dynamic mathesfromserver=new List();
+  dynamic mathesfromserver=[];
   var loacalteamid;
   var visitorteamid;
   void getmatches() async {
@@ -281,7 +281,7 @@ class _UpcomingtabState extends State<Oneday> {
 
 
       });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
 
@@ -317,7 +317,7 @@ class _UpcomingtabState extends State<Oneday> {
     }
   }
   List<Widget> getEvetnts() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     if(widget.status=="recent"){
       for(int i= mathesfromserver.length-1; i>=0;i--){
         loacalteamid=mathesfromserver[i]['localteam_id'];

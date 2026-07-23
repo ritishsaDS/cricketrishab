@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:CricScore_App/UI/quizdialog.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/quizdialog.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,7 +13,7 @@ import 'OpenBlog.dart';
 import 'Topstorydetail.dart';
 
 class BlogList extends StatefulWidget {
-  const BlogList({Key key}) : super(key: key);
+  const BlogList({super.key});
 
   @override
   _BlogListState createState() => _BlogListState();
@@ -49,24 +49,24 @@ class _BlogListState extends State<BlogList> {
     nonPersonalizedAds: true,
   );
 
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
   void _createInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/1033173712',
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             print('$ad loaded');
             _interstitialAd = ad;
             _numInterstitialLoadAttempts = 0;
-            _interstitialAd.setImmersiveMode(true);
+            _interstitialAd!.setImmersiveMode(true);
           },
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error.');
@@ -84,7 +84,7 @@ class _BlogListState extends State<BlogList> {
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -98,7 +98,7 @@ class _BlogListState extends State<BlogList> {
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
   }
   @override
@@ -110,7 +110,7 @@ class _BlogListState extends State<BlogList> {
   }
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -134,7 +134,7 @@ class _BlogListState extends State<BlogList> {
       print('Warning: attempt to show rewarded before loaded.');
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (RewardedAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
@@ -149,15 +149,15 @@ class _BlogListState extends State<BlogList> {
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
     });
     _rewardedAd = null;
   }
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -422,9 +422,9 @@ class _BlogListState extends State<BlogList> {
             if (_anchoredBanner != null)
               Container(
                 color: Colors.white,
-                width: _anchoredBanner.size.width.toDouble(),
-                height: _anchoredBanner.size.height.toDouble(),
-                child: AdWidget(ad: _anchoredBanner),
+                width: _anchoredBanner!.size.width.toDouble(),
+                height: _anchoredBanner!.size.height.toDouble(),
+                child: AdWidget(ad: _anchoredBanner!),
               ),
           ],
         ),
@@ -432,7 +432,7 @@ class _BlogListState extends State<BlogList> {
     ));
   }
 
-  dynamic newsfromserver = new List();
+  dynamic newsfromserver = [];
   void getnews() async {
     setState(() {
       isLoading = true;
@@ -476,7 +476,7 @@ class _BlogListState extends State<BlogList> {
   }
 
   List<Widget> newswidget() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     for (int i = newsfromserver.length-1; i >=0; i--) {
       productList.add(
         GestureDetector(

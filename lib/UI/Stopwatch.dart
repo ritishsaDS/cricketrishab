@@ -9,7 +9,7 @@ class StopWatchTimerPage extends StatefulWidget {
 class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
   static const countdownDuration = Duration(minutes: 11919);
   Duration duration = Duration();
-  Timer timer;
+  Timer? timer;
 
   bool countDown =true;
   var currentTime = DateTime.now();
@@ -60,7 +60,7 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: Colors.orange[50],
+    backgroundColor: Colors.orange[50]!,
     appBar: AppBar(
       automaticallyImplyLeading: false,
       title: Text("Flutter StopWatch Timer Demo"),
@@ -94,7 +94,7 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
     );
   }
 
-  Widget buildTimeCard({@required String time, @required String header}) =>
+  Widget buildTimeCard({required String time, required String header}) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -114,7 +114,7 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
       );
 
   Widget buildButtons(){
-    final isRunning = timer == null? false: timer.isActive;
+    final isRunning = timer?.isActive ?? false;
     final isCompleted = duration.inSeconds == 0;
     return isRunning || isCompleted
         ? Row(
@@ -149,12 +149,11 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
   final Color backgroundColor;
   final VoidCallback onClicked;
 
-  const ButtonWidget({ @required this.text, @required this.onClicked,
+  const ButtonWidget({ required this.text, required this.onClicked,
     this.color = Colors.white, this.backgroundColor = Colors.black}) ;
   @override
   Widget build(BuildContext context) => ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          primary: backgroundColor,
+      style: ElevatedButton.styleFrom(backgroundColor: backgroundColor,
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16)
       ),
       onPressed: onClicked,

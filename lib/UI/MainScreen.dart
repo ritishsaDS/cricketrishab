@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:cricscore_app/Utils/facebook_login_compat.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/UI/AllMAtches.dart';
-import 'package:CricScore_App/UI/BlogList.dart';
-import 'package:CricScore_App/UI/Dashboard.dart';
-import 'package:CricScore_App/UI/Profile.dart';
-import 'package:CricScore_App/UI/Quizmain.dart';
-import 'package:CricScore_App/UI/Team.dart';
-import 'package:CricScore_App/UI/quizdialog.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/AllMAtches.dart';
+import 'package:cricscore_app/UI/BlogList.dart';
+import 'package:cricscore_app/UI/Dashboard.dart';
+import 'package:cricscore_app/UI/Profile.dart';
+import 'package:cricscore_app/UI/Quizmain.dart';
+import 'package:cricscore_app/UI/Team.dart';
+import 'package:cricscore_app/UI/quizdialog.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,15 +22,15 @@ import 'QUizScreen.dart';
 import 'Quizmatches.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final databaseReference = FirebaseDatabase.instance.reference();
-  GoogleSignInAccount _userObj;
+  final databaseReference = FirebaseDatabase.instance.ref();
+  GoogleSignInAccount? _userObj;
   bool isLoggedIn = false;
   var name;
   var profileData;
@@ -69,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
 
         child: BottomNavigationBar(
 
-          backgroundColor: Colors.grey[200],
+          backgroundColor: Colors.grey[200]!,
           unselectedItemColor: Colors.grey,
           selectedItemColor: Colors.black,
           showUnselectedLabels: true,
@@ -84,38 +84,23 @@ class _MainScreenState extends State<MainScreen> {
           items: [
             BottomNavigationBarItem(
               icon: ImageIcon(Image.asset('assets/icons/home.png').image),
-              title: Text(
-                "Home",
-                style: TextStyle(color: Colors.black),
-              ),
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(Image.asset('assets/icons/matches.png').image),
-              title: Text(
-                "Matches",
-                style: TextStyle(color: Colors.black),
-              ),
+              label: 'Matches',
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(Image.asset('assets/icons/win.png').image),
-              title: Text(
-                "Quiz",
-                style: TextStyle(color: Colors.black),
-              ),
+              label: 'Quiz',
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(Image.asset('assets/icons/blogs.png').image),
-              title: Text(
-                "News",
-                style: TextStyle(color: Colors.black),
-              ),
+              label: 'News',
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(Image.asset('assets/icons/more.png').image),
-              title: Text(
-                "More",
-                style: TextStyle(color: Colors.black),
-              ),
+              label: 'More',
             ),
           ],
 
@@ -145,7 +130,7 @@ class _MainScreenState extends State<MainScreen> {
     showDialog<String>(
       context: context,
 
-      builder: (BuildContext context) => new AlertDialog(
+      builder: (BuildContext context) => AlertDialog(
 
         content: Container(
           height: SizeConfig.screenHeight*0.15,
@@ -161,8 +146,7 @@ class _MainScreenState extends State<MainScreen> {
                 onPressed: () {
                   initiateFacebookLogin();
                 },
-                style: ElevatedButton.styleFrom(
-                    primary: Color(0XFF3B5998),
+                style: ElevatedButton.styleFrom(backgroundColor: Color(0XFF3B5998),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     textStyle: TextStyle(
                         fontSize: 16,
@@ -181,8 +165,7 @@ class _MainScreenState extends State<MainScreen> {
                   googlelogin();
                   Navigator.pop(context);
                 },
-                style: ElevatedButton.styleFrom(
-                    primary: Color(0XFFDD4B39),
+                style: ElevatedButton.styleFrom(backgroundColor: Color(0XFFDD4B39),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     textStyle: TextStyle(
                         fontSize: 16,
@@ -202,12 +185,12 @@ setState(() {
  name= prefs.getString("name");
 
 });    print(";jnk;jnkasdv;jnko");
-    databaseReference.once().then((DataSnapshot snapshot) {
+    databaseReference.get().then((DataSnapshot snapshot) {
 
       setState(() {
-        matchkey=snapshot.value['Matchkeys']['Matachapikey'];
-        fbbannerid=snapshot.value['Matchkeys']['fb_bannerkey'];
-        fbinterstetialid=snapshot.value['Matchkeys']['fb_interstitialkey'];
+        matchkey=(snapshot.value as Map)['Matchkeys']['Matachapikey'];
+        fbbannerid=(snapshot.value as Map)['Matchkeys']['fb_bannerkey'];
+        fbinterstetialid=(snapshot.value as Map)['Matchkeys']['fb_interstitialkey'];
         print('matchkey : ${matchkey}');
       });
     //  print('ranking : ${snapshot.value['ImagesOdi']}');
@@ -222,23 +205,23 @@ setState(() {
         //_isLoggedIn = true;
         _userObj = userData;
         print("jejjjnkjnkek"+_userObj.toString());
-        print(_userObj.displayName);
-        print(_userObj.id);
-        print(_userObj.photoUrl);
-        print(_userObj.email);
-        print(_userObj.authHeaders);
-        if (_userObj.displayName != null) {
+        print(_userObj!.displayName!);
+        print(_userObj!.id!);
+        print(_userObj!.photoUrl!);
+        print(_userObj!.email!);
+        print(_userObj!.authHeaders);
+        if (_userObj!.displayName! != null) {
           // //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUpCook(
           //     name:_userObj.displayName,
           //     email:_userObj.email
           // )));
           data={
-            "email": _userObj.email,
-            'name':_userObj.displayName,
+            "email": _userObj!.email!,
+            'name':_userObj!.displayName!,
 
-            'image':_userObj.photoUrl,
+            'image':_userObj!.photoUrl!,
             "phone":null,
-            "provider_id":_userObj.id,
+            "provider_id":_userObj!.id!,
 
             "provider":"Google"
           };
@@ -247,12 +230,12 @@ setState(() {
                 headers: {
                   "Accept":"application/json"
                 },
-                body: {"email": _userObj.email,
-                  'name': _userObj.displayName,
+                body: {"email": _userObj!.email!,
+                  'name': _userObj!.displayName!,
 
-                  'image': _userObj.photoUrl,
+                  'image': _userObj!.photoUrl!,
                   "phone": "99449",
-                  "provider_id": _userObj.id,
+                  "provider_id": _userObj!.id!,
 
                   "provider": "Google"}
             );
@@ -299,7 +282,7 @@ setState(() {
     await facebookLogin.logInWithReadPermissions(['email']);
     switch (facebookLoginResult.status) {
       case FacebookLoginStatus.error:
-        print("Error"+facebookLoginResult.errorMessage);
+        print("Error" + (facebookLoginResult.errorMessage ?? ""));
         //onLoginStatusChanged(false);
         break;
       case FacebookLoginStatus.cancelledByUser:
@@ -309,7 +292,7 @@ setState(() {
       case FacebookLoginStatus.loggedIn:
         var graphResponse = await get(
             Uri.parse('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token='
-                '${facebookLoginResult.accessToken.token}'
+                '${facebookLoginResult.accessToken?.token}'
             ));
 
         var profile = json.decode(graphResponse.body);

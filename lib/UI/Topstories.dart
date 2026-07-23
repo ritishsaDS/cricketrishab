@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/UI/Topstorydetail.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Topstorydetail.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 class Topstories extends StatefulWidget{
@@ -246,7 +246,7 @@ class _TopstoriesState extends State<Topstories> {
      ),
    );
   }
-  dynamic newsfromserver = new List();
+  dynamic newsfromserver = [];
   void getnews() async {
     setState(() {
       isLoading = true;
@@ -290,7 +290,7 @@ class _TopstoriesState extends State<Topstories> {
   }
 
   List<Widget> newswidget() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     for (int i = 0; i < newsfromserver.length; i++) {
       productList.add(
         GestureDetector(
