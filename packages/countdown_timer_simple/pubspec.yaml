@@ -1,0 +1,12 @@
+name: countdown_timer_simple
+description: Local null-safe fork of countdown_timer_simple for Flutter 3 / Dart 3.
+version: 1.0.3
+publish_to: none
+
+environment:
+  sdk: '>=2.17.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter

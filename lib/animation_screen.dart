@@ -7,7 +7,7 @@ class AnimationScreen extends StatefulWidget {
      this.color
   });
 
-  final Color color;
+  final Color? color;
 
   @override
   _AnimationScreenState createState() => _AnimationScreenState();
@@ -15,8 +15,8 @@ class AnimationScreen extends StatefulWidget {
 
 class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProviderStateMixin {
   Size size = Size.zero;
-   AnimationController _controller;
-   StaggeredRaindropAnimation _animation;
+   AnimationController? _controller;
+   StaggeredRaindropAnimation? _animation;
 
   @override
   void initState() {
@@ -25,10 +25,10 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
       duration: const Duration(milliseconds: 3000),
       vsync: this,
     );
-    _animation = StaggeredRaindropAnimation(_controller);
-    _controller.forward();
+    _animation = StaggeredRaindropAnimation(_controller!);
+    _controller!.forward();
 
-    _controller.addListener(() {
+    _controller!.addListener(() {
       setState(() {});
     });
   }
@@ -51,19 +51,19 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
               child: CustomPaint(
                   painter: HolePainter(
                       color: widget.color,
-                      holeSize: _animation.holeSize.value * size.width
+                      holeSize: _animation!.holeSize.value * size.width
                   )
               )
           ),
           Positioned(
-              top: _animation.dropPosition.value * size.height,
-              left: size.width / 2 - _animation.dropSize.value / 2,
+              top: _animation!.dropPosition.value * size.height,
+              left: size.width / 2 - _animation!.dropSize.value / 2,
               child: SizedBox(
-                  width: _animation.dropSize.value,
-                  height: _animation.dropSize.value,
+                  width: _animation!.dropSize.value,
+                  height: _animation!.dropSize.value,
                   child: CustomPaint(
                     painter: DropPainter(
-                        visible: _animation.dropVisible.value
+                        visible: _animation!.dropVisible.value
                     ),
                   )
               )
@@ -73,7 +73,7 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
               child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Opacity(
-                      opacity: _animation.textOpacity.value,
+                      opacity: _animation!.textOpacity.value,
                       child: Text(
                         'CricScore',
                         style: TextStyle(
@@ -90,7 +90,7 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    _controller?.dispose();
   }
 }
 
@@ -107,7 +107,7 @@ class DropPainter extends CustomPainter {
       return;
     }
 
-    Path path = new Path();
+    Path path = Path();
     path.moveTo(size.width / 2, 0);
     path.quadraticBezierTo(0, size.height * 0.8, size.width / 2, size.height);
     path.quadraticBezierTo(size.width, size.height * 0.8, size.width / 2, 0);

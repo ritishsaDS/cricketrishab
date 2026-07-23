@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 
 class Privacy extends StatefulWidget{
   @override
@@ -68,7 +68,7 @@ body:
     );
 
   }
-  dynamic newsfromserver = new List();
+  dynamic newsfromserver = [];
   void getPrivacy() async {
     setState(() {
       isLoading = true;
@@ -107,7 +107,7 @@ body:
     }
   }
   List<Widget> newswidget() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     for (int i = 0; i < newsfromserver.length; i++) {
       productList.add(
         Container(

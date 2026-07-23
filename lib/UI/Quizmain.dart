@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:CricScore_App/UI/quizdialog.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
+import 'package:cricscore_app/UI/quizdialog.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:http/http.dart'as http;
@@ -34,17 +34,17 @@ class _QuizmainState extends State<Quizmain> {
     nonPersonalizedAds: true,
   );
 
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -163,7 +163,7 @@ class _QuizmainState extends State<Quizmain> {
       print('We have more questions!');
       progressValue=0.0;
       const oneSec = const Duration(seconds: 1);
-      new Timer.periodic(oneSec, (Timer t) {
+      Timer.periodic(oneSec, (Timer t) {
       setState(() {
         progressValue += 0.1;});});
     } else {

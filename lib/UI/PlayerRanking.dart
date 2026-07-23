@@ -1,8 +1,8 @@
-import 'package:CricScore_App/UI/Odiranking.dart';
-import 'package:CricScore_App/UI/Testranking.dart';
-import 'package:CricScore_App/UI/t20rank.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Odiranking.dart';
+import 'package:cricscore_app/UI/Testranking.dart';
+import 'package:cricscore_app/UI/t20rank.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class PlayerRanking extends StatefulWidget{
 }
 
 class _PlayerRankingState extends State<PlayerRanking> with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  TabController? _nestedTabController;
   bool isLoading=false;
   bool isError=false;
   var  testmatch=[];
@@ -23,31 +23,31 @@ class _PlayerRankingState extends State<PlayerRanking> with TickerProviderStateM
   var  ODIimage=[];
   var  T20=[];
   var t20image=[];
-  final databaseReference = FirebaseDatabase.instance.reference();
+  final databaseReference = FirebaseDatabase.instance.ref();
   @override
   void initState() {
     getranking();
     super.initState();
     readData();
-    _nestedTabController = new TabController(length: 3, vsync: this);
+    _nestedTabController = TabController(length: 3, vsync: this);
   }
   void readData() {
-    databaseReference.once().then((DataSnapshot snapshot) {
-      print('ranking : ${snapshot.value['Womens Ranking']['OneDay']}');
-      print('ranking : ${snapshot.value['ImagesOdi']}');
-      T20.add(snapshot.value['MensRanking']['T20']);
-      t20image.add(snapshot.value['MensRanking']['TestImages']);
-      ODI.add(snapshot.value['MensRanking']['OneDay']);
-      ODIimage.add(snapshot.value['MensRanking']['TestImages']);
-      testmatch.add(snapshot.value['MensRanking']['Test']);
-      testmatchimages.add(snapshot.value['MensRanking']['TestImages']);
+    databaseReference.get().then((DataSnapshot snapshot) {
+      print('ranking : ${(snapshot.value as Map)['Womens Ranking']['OneDay']}');
+      print('ranking : ${(snapshot.value as Map)['ImagesOdi']}');
+      T20.add((snapshot.value as Map)['MensRanking']['T20']);
+      t20image.add((snapshot.value as Map)['MensRanking']['TestImages']);
+      ODI.add((snapshot.value as Map)['MensRanking']['OneDay']);
+      ODIimage.add((snapshot.value as Map)['MensRanking']['TestImages']);
+      testmatch.add((snapshot.value as Map)['MensRanking']['Test']);
+      testmatchimages.add((snapshot.value as Map)['MensRanking']['TestImages']);
 
     });}
 
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
+    _nestedTabController!.dispose();
   }
 
   @override
@@ -103,14 +103,14 @@ class _PlayerRankingState extends State<PlayerRanking> with TickerProviderStateM
       ),
     );
   }
-  dynamic scorefromserver=new List();
+  dynamic scorefromserver=[];
   void getranking() async {
     // print("jkejksdjk"+selectedDate.toString());
     setState(() {
       isLoading=true;
       //  print(selectedDate.toString());
     });
-    // var newDate = new DateTime(selectedDate.year, selectedDate.month , selectedDate.day-2);
+    // var newDate = DateTime(selectedDate.year, selectedDate.month , selectedDate.day-2);
     //  print(newDate);
         {
       final uri = 'https://cricket.sportmonks.com/api/v2.0/team-rankings';

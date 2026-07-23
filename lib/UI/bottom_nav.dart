@@ -12,31 +12,19 @@ class _BottomState extends State<Bottom> {
       type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
-          title: Text(
-            'Home',
-            style: TextStyle(color: Colors.black),
-          ),
+          label: 'Home',
           icon: Icon(Icons.home),
         ),
         BottomNavigationBarItem(
-          title: Text(
-            'My Bookings',
-            style: TextStyle(color: Colors.grey),
-          ),
+          label: 'My Bookings',
           icon: Icon(Icons.assignment),
         ),
         BottomNavigationBarItem(
-          title: Text(
-            'Help Center',
-            style: TextStyle(color: Colors.grey),
-          ),
+          label: 'Help Center',
           icon: Icon(Icons.help),
         ),
         BottomNavigationBarItem(
-          title: Text(
-            'Profile',
-            style: TextStyle(color: Colors.grey),
-          ),
+          label: 'Profile',
           icon: Icon(Icons.account_circle),
         )
       ],

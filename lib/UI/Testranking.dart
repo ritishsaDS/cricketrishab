@@ -10,7 +10,7 @@ class TestRanking extends StatefulWidget{
 }
 
 class _TestRankingState extends State<TestRanking> {
-  var testranking=new List();
+  var testranking=[];
  var teamlength=10;
   @override
   void initState()  {
@@ -38,7 +38,7 @@ body: SafeArea(
   }
 
  List<Widget> getTestRank() {
-   List<Widget> testlist=new List();
+   List<Widget> testlist=[];
     for(int i =0; i<teamlength;i++){
       print('Rank${i+1}');
       testlist.add(Container(margin: EdgeInsets.all(15),child: Row(children: [

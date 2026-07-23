@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -277,9 +277,9 @@ class _RecenttabscorecardState extends State<Recenttabscorecard> {
       ),
     );
   }
-  dynamic pastmatches=new List();
-  dynamic score=new List();
-  dynamic score2=new List();
+  dynamic pastmatches=[];
+  dynamic score=[];
+  dynamic score2=[];
   void getmatches() async {
     setState(() {
       isLoading=true;
@@ -325,7 +325,7 @@ class _RecenttabscorecardState extends State<Recenttabscorecard> {
     }
   }
   List<Widget> getEvetnts() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     for(int i= 0; i<score.length;i++){
       productList.add( GestureDetector(
         onTap: (){
@@ -466,7 +466,7 @@ class _RecenttabscorecardState extends State<Recenttabscorecard> {
     return productList;
   }
  List<Widget> getEvetnts2() {
-   List<Widget> productList = new List();
+   List<Widget> productList = [];
    for(int i= 0; i<score2.length;i++){
      productList.add( GestureDetector(
          onTap: (){

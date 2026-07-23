@@ -6,7 +6,7 @@ class StackOver extends StatefulWidget {
 
 class _StackOverState extends State<StackOver>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -17,7 +17,7 @@ class _StackOverState extends State<StackOver>
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    _tabController!.dispose();
   }
 
   @override
@@ -36,7 +36,7 @@ class _StackOverState extends State<StackOver>
             Container(
               height: 45,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: Colors.grey[300]!,
                 borderRadius: BorderRadius.circular(
                   25.0,
                 ),

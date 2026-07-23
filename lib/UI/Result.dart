@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/UI/MainScreen.dart';
+import 'package:cricscore_app/UI/MainScreen.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;
@@ -64,7 +64,7 @@ SizedBox(height: 20,),
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
               },
-            ), //FlatButton
+            ), //TextButton
           ], //<Widget>[]
         ), //Column
       ),

@@ -3,4 +3,5 @@
     <string name="app_name">CricScore</string>
     <string name="facebook_app_id">560229535066729</string>
     <string name="fb_login_protocol_scheme">fb560229535066729</string>
+    <string name="facebook_client_token">PLACEHOLDER_CLIENT_TOKEN</string>
 </resources>

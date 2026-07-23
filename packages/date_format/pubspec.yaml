@@ -1,0 +1,16 @@
+name: date_format
+publish_to: none
+description: A simple API to format dates. Provides various constants to build Date format string. Use `formatDate` method to format date according to format string.
+version: 2.0.9
+homepage: https://github.com/tejainece/date_format
+
+documentation:
+
+environment:
+  sdk: '>=2.12.0 <4.0.0'
+
+#dependencies:
+#  path: ^1.4.1
+
+dev_dependencies:
+  test: ^1.3.0

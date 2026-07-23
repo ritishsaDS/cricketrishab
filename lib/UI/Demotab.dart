@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/UI/Livematchtab.dart';
-import 'package:CricScore_App/UI/Notlivematch.dart';
-import 'package:CricScore_App/UI/Livematches.dart';
-import 'package:CricScore_App/UI/Recenttab.dart';
-import 'package:CricScore_App/UI/recenttabscorecard.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
+import 'package:cricscore_app/UI/Livematchtab.dart';
+import 'package:cricscore_app/UI/Notlivematch.dart';
+import 'package:cricscore_app/UI/Livematches.dart';
+import 'package:cricscore_app/UI/Recenttab.dart';
+import 'package:cricscore_app/UI/recenttabscorecard.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Oneday.dart';
@@ -22,23 +22,23 @@ class Locationstat extends StatefulWidget {
 
 class _LocationstatState extends State<Locationstat>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   bool isError = false;
   bool isLoading = false;
-  var upcoming =new List();
-  var recent = new List();
-  var live = new List();
+  var upcoming =[];
+  var recent = [];
+  var live = [];
   @override
   void initState() {
 
   ///  getmatches();
     super.initState();
-    _tabController = new TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    _tabController!.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -93,14 +93,14 @@ class Upcoming extends StatefulWidget {
 }
 class _NestedTabBarState extends State<Upcoming>
     with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  TabController? _nestedTabController;
   bool isError = false;
   bool isLoading = false;
-  var test = new List();
-  var one = new List();
-  var t20 = new List();
-  var upcoming = new List();
-  var recent = new List();
+  var test = [];
+  var one = [];
+  var t20 = [];
+  var upcoming = [];
+  var recent = [];
 
   @override
   void initState() {
@@ -108,13 +108,13 @@ class _NestedTabBarState extends State<Upcoming>
     print(widget.upcoming);
     getmatches();
     super.initState();
-    _nestedTabController = new TabController(length: 3, vsync: this);
+    _nestedTabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
+    _nestedTabController!.dispose();
   }
 
   @override
@@ -169,7 +169,7 @@ class _NestedTabBarState extends State<Upcoming>
     );
   }
 
-  dynamic mathesfromserver=new List();
+  dynamic mathesfromserver=[];
   void getmatches() async {
     setState(() {
       isLoading=true;
@@ -183,7 +183,7 @@ class _NestedTabBarState extends State<Upcoming>
             // "rs-token":prefs.getString("token")
 
           });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
         print(responseJson);

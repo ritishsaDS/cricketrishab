@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -61,7 +61,7 @@ scrollDirection: Axis.vertical,
 
    );
   }
-  dynamic scorefromserver = new List();
+  dynamic scorefromserver = [];
 
   void getlivescore() async {
     setState(() {
@@ -105,7 +105,7 @@ scrollDirection: Axis.vertical,
     }
   }
   List<Widget> Noevents(){
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     for(int i =0; i<scorefromserver.length;i++){
     productList.add(SingleChildScrollView
       (
@@ -114,7 +114,7 @@ scrollDirection: Axis.vertical,
         child:
 
         Container(
-          color: i % 2 == 0 ? Colors.grey[300] : Colors.white,
+          color: i % 2 == 0 ? Colors.grey[300]! : Colors.white,
             child:
               Row(  mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
               Container(padding:EdgeInsets.all(15),width:SizeConfig.blockSizeHorizontal*30,child:   Text(scorefromserver[i]['teams'], textAlign: TextAlign.start),),
