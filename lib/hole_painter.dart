@@ -6,12 +6,12 @@ class HolePainter extends CustomPainter {
      this.holeSize,
   });
 
-  Color color;
-  double holeSize;
+  Color? color;
+  double? holeSize;
 
   @override
   void paint(Canvas canvas, Size size) {
-    double radius = holeSize / 2;
+    double radius = (holeSize ?? 0) / 2;
     Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
     Rect outerCircleRect = Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: radius);
     Rect innerCircleRect = Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: radius / 2);
@@ -36,8 +36,8 @@ class HolePainter extends CustomPainter {
         ..close(),
     );
 
-    canvas.drawPath(transparentHole, Paint()..color = color);
-    canvas.drawPath(halfTransparentRing, Paint()..color = color.withOpacity(0.5));
+    canvas.drawPath(transparentHole, Paint()..color = color!);
+    canvas.drawPath(halfTransparentRing, Paint()..color = color!.withOpacity(0.5));
   }
 
   @override

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class playerdetail extends StatefulWidget{
   var tournamentkey;
@@ -32,7 +32,7 @@ super.initState();
           child: Column(
           children: [
             Container(
-              color: Colors.grey[300],
+              color: Colors.grey[300]!,
               padding: EdgeInsets.all(10),
               width: SizeConfig.screenWidth,
               child: Text("PERSONAL INFO."),
@@ -88,14 +88,14 @@ super.initState();
             ),
             Divider(thickness: 1.5,),
             Container(
-              color: Colors.grey[300],
+              color: Colors.grey[300]!,
               padding: EdgeInsets.all(10),
               width: SizeConfig.screenWidth,
               child: Text("Tournament Stats"),
             ),
             SizedBox(height: 10,),
             Container(
-              color: Colors.grey[300],
+              color: Colors.grey[300]!,
               padding: EdgeInsets.all(10),
               width: SizeConfig.screenWidth,
               child: Text("Batting"),
@@ -143,7 +143,7 @@ super.initState();
             Divider(thickness: 1.5,),
             SizedBox(height: 10,),
             Container(
-              color: Colors.grey[300],
+              color: Colors.grey[300]!,
               padding: EdgeInsets.all(10),
               width: SizeConfig.screenWidth,
               child: Text("Bowling"),
@@ -195,7 +195,7 @@ super.initState();
         ),),
     );
   }
-dynamic playerdetail = new List();
+dynamic playerdetail = [];
   Future<void> getplayerstats() async {
     setState(() {
       isLoading = true;
@@ -206,8 +206,8 @@ dynamic playerdetail = new List();
       final response = await get(
           Uri.parse(
               'https://api.sports.roanuz.com/v5/cricket/RS_P_1415363533180375074/tournament/${widget.tournamentkey}/player/${widget.playerkey}/stats/'),
-          headers: {"rs-token": prefs.getString("token")});
-      print("bjkb" + response.request.url.toString());
+          headers: {"rs-token": prefs.getString("token") ?? ""});
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
        setState(() {

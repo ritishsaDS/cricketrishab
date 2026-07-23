@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
-import 'package:CricScore_App/UI/TestMatchdetail.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:cricscore_app/UI/TestMatchdetail.dart';
+import 'package:facebook_audience_network_plus/facebook_audience_network_plus.dart';
+import 'package:cricscore_app/Utils/facebook_login_compat.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -12,13 +12,13 @@ import 'package:intl/intl.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:CricScore_App/UI/LiveMatchdetail.dart';
-import 'package:CricScore_App/UI/LoginScreen.dart';
-import 'package:CricScore_App/UI/Quizmain.dart';
-import 'package:CricScore_App/UI/quizdialog.dart';
-import 'package:CricScore_App/UI/testingadd.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/LiveMatchdetail.dart';
+import 'package:cricscore_app/UI/LoginScreen.dart';
+import 'package:cricscore_app/UI/Quizmain.dart';
+import 'package:cricscore_app/UI/quizdialog.dart';
+import 'package:cricscore_app/UI/testingadd.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,14 +32,14 @@ import 'Topstorydetail.dart';
 
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final controller = ScrollController();
   static const double padding = 16;
   static const double spacing = 8;
@@ -53,13 +53,13 @@ class _DashboardState extends State<Dashboard> {
     nonPersonalizedAds: true,
   );
 
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
   var months=[
     '',
@@ -103,7 +103,7 @@ class _DashboardState extends State<Dashboard> {
     "South Africa (SA)",
     "Ireland (IRE)",
   ];
-  GoogleSignInAccount _userObj;
+  GoogleSignInAccount? _userObj;
   bool isLoggedIn = false;
   var profileData;
   Map userfb = {};
@@ -140,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
   final _currentPageNotifier = ValueNotifier<int>(0);
   void jumpToItem(int item) {
     final width = controller.position.maxScrollExtent +
-        context.size.width -
+        context.size!.width -
         padding * 2 +
         spacing;
     final value = item / newItemCount * width;
@@ -152,7 +152,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   // BooksApi booksApi = BooksApi();
-  PageController controllers;
+  late PageController controllers;
 
   // GlobalKey<PageContainerState> key = GlobalKey();
 
@@ -204,7 +204,7 @@ class _DashboardState extends State<Dashboard> {
             print('$ad loaded');
             _interstitialAd = ad;
             _numInterstitialLoadAttempts = 0;
-            _interstitialAd.setImmersiveMode(true);
+            _interstitialAd!.setImmersiveMode(true);
           },
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error.');
@@ -232,14 +232,14 @@ class _DashboardState extends State<Dashboard> {
     // Called when an impression occurs on the ad.
     onAdImpression: (Ad ad) => print('Ad impression.'),
     // Called when a click is recorded for a NativeAd.
-    onNativeAdClicked: (NativeAd ad) => print('Ad clicked.'),
+    onAdClicked: (Ad ad) => print('Ad clicked.'),
   );
   void _showInterstitialAd() {
     if (_interstitialAd == null) {
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -253,7 +253,7 @@ class _DashboardState extends State<Dashboard> {
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
   }
   @override
@@ -266,7 +266,7 @@ class _DashboardState extends State<Dashboard> {
 
   }
   static final _kAdIndex = 4;
-  NativeAd _ad;
+  late NativeAd _ad;
   bool _isAdLoaded = false;
   List<Object> itemList = [];
 
@@ -279,7 +279,7 @@ class _DashboardState extends State<Dashboard> {
 
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -312,7 +312,7 @@ class _DashboardState extends State<Dashboard> {
       print('Warning: attempt to show rewarded before loaded.');
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (RewardedAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
@@ -327,15 +327,15 @@ class _DashboardState extends State<Dashboard> {
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
     });
     _rewardedAd = null;
   }
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -389,7 +389,7 @@ class _DashboardState extends State<Dashboard> {
 
   //  getmatches();
     _ad = NativeAd(
-      adUnitId: NativeAd.testAdUnitId,
+      adUnitId: 'ca-app-pub-3940256099942544/2247696110',
       factoryId: 'listTile',
       request: AdRequest(),
       listener: NativeAdListener(
@@ -516,7 +516,7 @@ if(prefs.getString("name")==null){
   showDialog<String>(
     context: context,
 
-    builder: (BuildContext context) => new AlertDialog(
+    builder: (BuildContext context) => AlertDialog(
 
       content: Container(
         height: SizeConfig.screenHeight*0.15,
@@ -554,8 +554,7 @@ if(prefs.getString("name")==null){
                 googlelogin();
                 Navigator.pop(context);
               },
-              style: ElevatedButton.styleFrom(
-                  primary: Color(0XFFDD4B39),
+              style: ElevatedButton.styleFrom(backgroundColor: Color(0XFFDD4B39),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   textStyle: TextStyle(
                       fontSize: 16,
@@ -653,9 +652,9 @@ else{
                       if (_anchoredBanner != null)
                         Container(
                           color: Colors.green,
-                          width: _anchoredBanner.size.width.toDouble(),
-                          height: _anchoredBanner.size.height.toDouble(),
-                          child: AdWidget(ad: _anchoredBanner),
+                          width: _anchoredBanner!.size.width.toDouble(),
+                          height: _anchoredBanner!.size.height.toDouble(),
+                          child: AdWidget(ad: _anchoredBanner!),
                         ),
                      // facebookadd()
 
@@ -685,12 +684,13 @@ else{
          }
         else{
           print("jknvoddd");
-          Container();
+          return Container();
         }
 
       },
     );
 
+    return const SizedBox.shrink();
 }
 
   _buildCircleIndicator() {
@@ -758,9 +758,9 @@ else{
   //   }
   // }
 
-  dynamic mathesfromserver = new List();
+  dynamic mathesfromserver = [];
   var featuresfromserver = [];
-  List<dynamic> postsfromserver = new List();
+  List<dynamic> postsfromserver = [];
   dynamic livematches = [];
   dynamic unlivematch = [];
   dynamic pastmatch = [];
@@ -780,7 +780,7 @@ today=DateTime.now();
           Uri.parse(
               'https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,league,stage,balls,firstUmpire,referee&filter[status]=Finished&filter[starts_between]=${DateTime(today.year, today.month , today.day-4).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+1).toString().substring(0,10)}&sort=starting_at'),
          );
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
         mathesfromserver = responseJson['data'];
@@ -834,7 +834,7 @@ print("jhbhfddd"+livematches.length.toString());
           Uri.parse(
               'https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=${matchkey}&include=runs,visitorteam,localteam,batting,bowling,venue,league,stage,balls,firstUmpire,referee&filter[status]=NS&filter[starts_between]=${DateTime(today.year, today.month , today.day-1).toString().substring(0,10)},${DateTime(today.year, today.month , today.day+4).toString().substring(0,10)}&sort=starting_at'),
          );
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
         pastmatch = responseJson['data'];
@@ -880,7 +880,7 @@ print("jhbhfddd"+livematches.length.toString());
         Uri.parse(
             'https://cricket.sportmonks.com/api/v2.0/livescores?api_token=${matchkey}&include=lineup,runs,visitorteam,localteam,batting,bowling,league,stage'),
       );
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       print("bjkblive" + response.statusCode.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
@@ -1013,7 +1013,7 @@ print("jhbhfddd"+livematches.length.toString());
   }
 
   List<Widget> featuredwidegt() {
-    List<Widget> featuredlist = new List();
+    List<Widget> featuredlist = [];
     {
       for (int i = 0; i < unlivematch.length; i++) {
         loacalteamid = unlivematch[i]['localteam_id'];
@@ -2316,7 +2316,7 @@ print("jhbhfddd"+livematches.length.toString());
     return featuredlist;
   }
   List<Widget>postswidget(){
-    List<Widget>postlists=new List();
+    List<Widget>postlists=[];
     for(int i=postsfromserver.length-1; i>=0;i--){
 
       if (_isAdLoaded && i == _kAdIndex) {
@@ -2425,23 +2425,23 @@ print("jhbhfddd"+livematches.length.toString());
         //_isLoggedIn = true;
         _userObj = userData;
         print("jejjjnkjnkek"+_userObj.toString());
-        print(_userObj.displayName);
-        print(_userObj.id);
-        print(_userObj.photoUrl);
-        print(_userObj.email);
-        print(_userObj.authHeaders);
-        if (_userObj.displayName != null) {
+        print(_userObj!.displayName!);
+        print(_userObj!.id!);
+        print(_userObj!.photoUrl!);
+        print(_userObj!.email!);
+        print(_userObj!.authHeaders!);
+        if (_userObj!.displayName! != null) {
           // //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUpCook(
           //     name:_userObj.displayName,
           //     email:_userObj.email
           // )));
            data={
-            "email": _userObj.email,
-            'name':_userObj.displayName,
+            "email": _userObj!.email!,
+            'name':_userObj!.displayName!,
 
-            'image':_userObj.photoUrl,
+            'image':_userObj!.photoUrl!,
             "phone":null,
-            "provider_id":_userObj.id,
+            "provider_id":_userObj!.id!,
 
             "provider":"Google"
           };
@@ -2452,12 +2452,12 @@ print("jhbhfddd"+livematches.length.toString());
                 },
                 body: {
 
-                  "email": _userObj.email,
-                  'name': _userObj.displayName,
+                  "email": _userObj!.email!,
+                  'name': _userObj!.displayName!,
 
-                  'image': _userObj.photoUrl,
+                  'image': _userObj!.photoUrl!,
                   "phone": "",
-                  "provider_id": _userObj.id,
+                  "provider_id": _userObj!.id!,
 
                   "provider": "Google"}
             );
@@ -2467,10 +2467,10 @@ print("jhbhfddd"+livematches.length.toString());
               final responseJson = json.decode(response.body);
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setString("userid",responseJson['user']['id'].toString());
-              prefs.setString("name", _userObj.displayName);
-              prefs.setString("email", _userObj.email);
-              prefs.setString("image", _userObj.photoUrl);
-              prefs.setString("provider_id", _userObj.id);
+              prefs.setString("name", _userObj!.displayName!);
+              prefs.setString("email", _userObj!.email!);
+              prefs.setString("image", _userObj!.photoUrl!);
+              prefs.setString("provider_id", _userObj!.id!);
 Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizscreen()));
 
               setState(() {
@@ -2507,7 +2507,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizscreen()));
     await facebookLogin.logInWithReadPermissions(['email']);
     switch (facebookLoginResult.status) {
       case FacebookLoginStatus.error:
-        print("Error"+facebookLoginResult.errorMessage);
+        print("Error" + (facebookLoginResult.errorMessage ?? ""));
         //onLoginStatusChanged(false);
         break;
       case FacebookLoginStatus.cancelledByUser:
@@ -2517,7 +2517,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizscreen()));
       case FacebookLoginStatus.loggedIn:
         var graphResponse = await http.get(
             Uri.parse('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture&access_token='
-                '${facebookLoginResult.accessToken.token}'
+                '${facebookLoginResult.accessToken?.token}'
                 ));
 
         var profile = json.decode(graphResponse.body);

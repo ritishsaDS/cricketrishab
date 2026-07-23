@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 
 import 'Notlivematch.dart';
 
 class SearchMatch extends StatefulWidget {
-  const SearchMatch({Key key}) : super(key: key);
+  const SearchMatch({super.key});
 
   @override
   _SearchMatchState createState() => _SearchMatchState();
 }
 
 class _SearchMatchState extends State<SearchMatch> {
-  DateTime selectedDate;
+  late DateTime selectedDate;
 bool isLoading=false;
 bool isError=false;
 
@@ -74,14 +74,14 @@ bool isError=false;
       ),
     ));
   }
-  dynamic scorefromserver=new List();
+  dynamic scorefromserver=[];
   void getmatches(date) async {
     print("jkejksdjk"+selectedDate.toString());
     setState(() {
       isLoading=true;
       print(selectedDate.toString());
     });
-    var newDate = new DateTime(selectedDate.year, selectedDate.month , selectedDate.day-2);
+    var newDate = DateTime(selectedDate.year, selectedDate.month , selectedDate.day-2);
     print(newDate);
     try {
       final response = await http.post(Uri.parse('https://api.api-cricket.com/cricket/?method=get_events&APIkey=0c0684c94f7a4e8c1149da662d4c41eca9e253d3247e0cd8ffd6c8b1da6c7c8d&date_start=${newDate.toString().substring(0,10)}&date_stop=${selectedDate.toString().substring(0,10)}'));
@@ -122,7 +122,7 @@ bool isError=false;
     }
   }
   List<Widget> getEvetnts() {
-    List<Widget> productList = new List();
+    List<Widget> productList = [];
     for(int i= 0; i<scorefromserver.length;i++){
       productList.add( GestureDetector(
         onTap: (){

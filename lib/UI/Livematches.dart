@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:flutter_html/flutter_html.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/UI/Matchsquad.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Matchsquad.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -121,7 +121,7 @@ class _NotLivematchState extends State<Livematch> {
                         child: SingleChildScrollView(
                           child: Column(children: [
                             Container(
-                              color: Colors.grey[300],
+                              color: Colors.grey[300]!,
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
                               child: Text("Squads"),
@@ -131,7 +131,7 @@ class _NotLivematchState extends State<Livematch> {
                               width: SizeConfig.screenWidth,
                               child: Text(mathesfromserver['teams']['a']["name"]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                             Container(
                               // color:Colors.grey,
                               padding: EdgeInsets.all(10),
@@ -139,7 +139,7 @@ class _NotLivematchState extends State<Livematch> {
                               child: Text(mathesfromserver['teams']['b']["name"]),
                             ),
                             Container(
-                              color: Colors.grey[300],
+                              color: Colors.grey[300]!,
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
                               child: Text("Info"),
@@ -152,13 +152,13 @@ class _NotLivematchState extends State<Livematch> {
                                   children: [
                                     Text(
                                       "Match",
-                                      style: TextStyle(color: Colors.grey[700]),
+                                      style: TextStyle(color: Colors.grey[700]!),
                                     ),
                                     Text(mathesfromserver['sub_title'],
                                         style: TextStyle(color: Colors.black))
                                   ]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                             Container(
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
@@ -167,13 +167,13 @@ class _NotLivematchState extends State<Livematch> {
                                   children: [
                                     Text(
                                       "Series",
-                                      style: TextStyle(color: Colors.grey[700]),
+                                      style: TextStyle(color: Colors.grey[700]!),
                                     ),
                                     Text(mathesfromserver['short_name'],
                                         style: TextStyle(color: Colors.black))
                                   ]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                             Container(
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
@@ -182,12 +182,12 @@ class _NotLivematchState extends State<Livematch> {
                                   children: [
                                     Text(
                                       "Match Type",
-                                      style: TextStyle(color: Colors.grey[700]),
+                                      style: TextStyle(color: Colors.grey[700]!),
                                     ),
                                     Text(mathesfromserver['format'], style: TextStyle(color: Colors.black))
                                   ]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                             Container(
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
@@ -196,13 +196,13 @@ class _NotLivematchState extends State<Livematch> {
                                   children: [
                                     Text(
                                       "Toss",
-                                      style: TextStyle(color: Colors.grey[700]),
+                                      style: TextStyle(color: Colors.grey[700]!),
                                     ),
                                     Text("${mathesfromserver['toss']['winner']=='a'?teama:teamb } opted to ${mathesfromserver['toss']['elected']}",
                                         style: TextStyle(color: Colors.black))
                                   ]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                             Container(
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
@@ -211,13 +211,13 @@ class _NotLivematchState extends State<Livematch> {
                                   children: [
                                     Text(
                                       "Umpires",
-                                      style: TextStyle(color: Colors.grey[700]),
+                                      style: TextStyle(color: Colors.grey[700]!),
                                     ),
                                     Text("Richard Kettlebrough",
                                         style: TextStyle(color: Colors.black))
                                   ]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                             Container(
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
@@ -226,13 +226,13 @@ class _NotLivematchState extends State<Livematch> {
                                   children: [
                                     Text(
                                       "Refree",
-                                      style: TextStyle(color: Colors.grey[700]),
+                                      style: TextStyle(color: Colors.grey[700]!),
                                     ),
                                     Text("Chris Broad",
                                         style: TextStyle(color: Colors.black))
                                   ]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                             Container(
                               padding: EdgeInsets.all(10),
                               width: SizeConfig.screenWidth,
@@ -241,13 +241,13 @@ class _NotLivematchState extends State<Livematch> {
                                   children: [
                                     Text(
                                       "Venue",
-                                      style: TextStyle(color: Colors.grey[700]),
+                                      style: TextStyle(color: Colors.grey[700]!),
                                     ),
                                     Text(mathesfromserver['venue']['name'],
                                         style: TextStyle(color: Colors.black))
                                   ]),
                             ),
-                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]),
+                            Divider(height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           ]),
                         )),
                    SingleChildScrollView(child:  Container(
@@ -1082,7 +1082,7 @@ class _NotLivematchState extends State<Livematch> {
 
   }
   List<Widget>squadwidget(){
-    List<Widget>squadlist=new List();
+    List<Widget>squadlist=[];
     for(int i = 0; i<squada.length;i++){
       squadlist.add(Container(
         color: Colors.white,
@@ -1150,7 +1150,7 @@ class _NotLivematchState extends State<Livematch> {
     return squadlist;
   }
   List<Widget>battingorder(){
-    List<Widget>squadlist=new List();
+    List<Widget>squadlist=[];
     for(int i = 0; i<battingorderfirst.length;i++){
       squadlist.add(Container(
         color: Colors.white,
@@ -1266,7 +1266,7 @@ class _NotLivematchState extends State<Livematch> {
     return squadlist;
   }
   List<Widget>batting2ndorder(){
-    List<Widget>squadlist=new List();
+    List<Widget>squadlist=[];
     for(int i = 0; i<battingordersecond.length;i++){
       squadlist.add(Container(
         color: Colors.white,
@@ -1364,7 +1364,7 @@ class _NotLivematchState extends State<Livematch> {
             Divider(
               thickness: 1,
               height: 10,
-              color: Colors.grey[300],
+              color: Colors.grey[300]!,
             )
           ],),
         ),));
@@ -1374,7 +1374,7 @@ class _NotLivematchState extends State<Livematch> {
 
 
   List<Widget>squadwidgetb(){
-    List<Widget>squadlist=new List();
+    List<Widget>squadlist=[];
     for(int i = 0; i<squadb.length;i++){
       squadlist.add(Container(
         color: Colors.white,
@@ -1442,7 +1442,7 @@ class _NotLivematchState extends State<Livematch> {
     return squadlist;
   }
   List<Widget> bowlingorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingorder.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -1584,7 +1584,7 @@ class _NotLivematchState extends State<Livematch> {
   }
 
   List<Widget> bowlingsecondorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < bowlingordersecond.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -1725,15 +1725,15 @@ class _NotLivematchState extends State<Livematch> {
     return squadlist;
   }
 
-  dynamic mathesfromserver = new List();
-  dynamic battingorderfirst = new List();
-  dynamic battingordersecond = new List();
-  dynamic bowlingordersecond = new List();
-  dynamic bowlingorder = new List();
-  dynamic relatedballs = new List();
-  dynamic striker = new List();
-  dynamic nonstriker = new List();
-  dynamic currentbowler = new List();
+  dynamic mathesfromserver = [];
+  dynamic battingorderfirst = [];
+  dynamic battingordersecond = [];
+  dynamic bowlingordersecond = [];
+  dynamic bowlingorder = [];
+  dynamic relatedballs = [];
+  dynamic striker = [];
+  dynamic nonstriker = [];
+  dynamic currentbowler = [];
   void getfeaturedmatches() async {
     setState(() {
       isLoading = true;
@@ -1744,8 +1744,8 @@ class _NotLivematchState extends State<Livematch> {
       final response = await get(
           Uri.parse(
               'https://api.sports.roanuz.com/v5/cricket/RS_P_1415363533180375074/match/${widget.match['key']}/'),
-          headers: {"rs-token": prefs.getString("token")});
-      print("bjkb" + response.request.url.toString());
+          headers: {"rs-token": prefs.getString("token") ?? ""});
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
 
        setState(() {
@@ -1803,7 +1803,7 @@ currentbowler=mathesfromserver['play']['live']['bowler_key'];
     }
   }
 //   List <Widget> relatedballslist(){
-//     List<Widget> relatedlist=new List();
+//     List<Widget> relatedlist=[];
 //     for(int i =0; i<mathesfromserver['play']['live']['recent_overs'].length;i++){
 //       for(int j =0; j<mathesfromserver['play']['live']['recent_overs'][i]['ball_keys'].length;j++){
 //         print("blalkeysnu"+mathesfromserver['play']['live']['recent_overs'][i]['ball_keys'][j]);

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 
 import 'Dashboard.dart';
 import 'Matchsquad.dart';
@@ -115,7 +115,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                     Container(
                         child: Column(children: [
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("SQUADS"),
@@ -136,7 +136,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                             ),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           GestureDetector(
                             onTap: (){
                               // Navigator.push(
@@ -154,7 +154,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                             ),
                           ),
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("INFO"),
@@ -167,14 +167,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Match",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['status'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -183,14 +183,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Series",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['league']['name'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -199,14 +199,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Match Type",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['type'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -215,7 +215,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Toss",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(
                                       mathesfromserver['tosswon']['name'],
@@ -223,7 +223,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -232,14 +232,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Umpires",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['firstumpire']['fullname'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
 
 
                           Container(
@@ -250,14 +250,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Venue",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text("${mathesfromserver['venue']==null?"":mathesfromserver['venue']['name'].toString()}",
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         ])),
                     Container(
                       child: Column(
@@ -533,7 +533,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -548,7 +548,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -563,7 +563,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                           //       Container(
                           //           decoration: BoxDecoration(
                           //             shape: BoxShape.circle,
-                          //             color: Colors.grey[400],
+                          //             color: Colors.grey[400]!,
                           //           ),
                           //           padding: EdgeInsets.all(4),
                           //           width: SizeConfig.blockSizeHorizontal * 3.5,
@@ -1593,7 +1593,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                     Container(
                         child: Column(children: [
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("SQUADS"),
@@ -1609,7 +1609,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                             ),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           GestureDetector(
                             onTap: (){
                               // Navigator.push(
@@ -1631,7 +1631,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                             ),
                           ),
                           Container(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!,
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
                             child: Text("INFO"),
@@ -1644,14 +1644,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Match",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['status'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1660,14 +1660,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Series",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['league']['name'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1676,14 +1676,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Match Type",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['type'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1692,7 +1692,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Toss",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   // Text(
                                   //     mathesfromserver['tosswon']['name'],
@@ -1700,7 +1700,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                           Container(
                             padding: EdgeInsets.all(10),
                             width: SizeConfig.screenWidth,
@@ -1709,14 +1709,14 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Umpires",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(mathesfromserver['firstumpire']==null?"":mathesfromserver['firstumpire']['fullname'],
                                       style: TextStyle(color: Colors.black))
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
 
                           Container(
                             padding: EdgeInsets.all(10),
@@ -1726,7 +1726,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 children: [
                                   Text(
                                     "Venue",
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: Colors.grey[700]!),
                                   ),
                                   Text(                                mathesfromserver['venue']==null?"":mathesfromserver['venue']['name']+" , "+mathesfromserver['venue']['city'],overflow: TextOverflow.ellipsis,softWrap: true,
 
@@ -1734,7 +1734,7 @@ class _TestmatchState extends State<Testmatchdetail> {
                                 ]),
                           ),
                           Divider(
-                              height: 5, thickness: 1.5, color: Colors.grey[200]),
+                              height: 5, thickness: 1.5, color: Colors.grey[200]!),
                         ])),
                     Container(
                       child: Column(
@@ -1870,24 +1870,24 @@ class _TestmatchState extends State<Testmatchdetail> {
     }
 
   }
-  dynamic mathesfromserver=new List();
-  dynamic scorecarda=new List();
-  dynamic bowlingscorecarda=new List();
-  dynamic bowlingscorecardb=new List();
-  dynamic scorecardb=new List();
-  dynamic recentballs=new List();
-  var inning1=new List();
-  var inning2=new List();
-  var inning3=new List();
-  var inning4=new List();
-  var firstinningscore=new List();
-  var secondinningscore=new List();
-  var thirdinningscore=new List();
-  var fourinningscore=new List();
-  var batinning1=new List();
-  var batinning2=new List();
-  var batinning3=new List();
-  var batinning4=new List();
+  dynamic mathesfromserver=[];
+  dynamic scorecarda=[];
+  dynamic bowlingscorecarda=[];
+  dynamic bowlingscorecardb=[];
+  dynamic scorecardb=[];
+  dynamic recentballs=[];
+  var inning1=[];
+  var inning2=[];
+  var inning3=[];
+  var inning4=[];
+  var firstinningscore=[];
+  var secondinningscore=[];
+  var thirdinningscore=[];
+  var fourinningscore=[];
+  var batinning1=[];
+  var batinning2=[];
+  var batinning3=[];
+  var batinning4=[];
   var teams={};
   void getmatchdetail() async {
     print(";jnksdfmklsdko");
@@ -1902,7 +1902,7 @@ class _TestmatchState extends State<Testmatchdetail> {
 
 
       });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
 
@@ -2018,7 +2018,7 @@ class _TestmatchState extends State<Testmatchdetail> {
         });
       }
     } catch (e) {
-      showToast(e);
+      showToast(e.toString());
       setState(() {
         isError = true;
         isLoading = true;
@@ -2026,7 +2026,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     }
   }
   List<Widget> squadwidget() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squada.length; i++) {
       squadlist.add(Container(
         color: Colors.white,
@@ -2095,7 +2095,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     return squadlist;
   }
   List<Widget> squadwidgetb() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < squadb.length; i++) {
       squadlist.add(
           Container(
@@ -2163,7 +2163,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     return squadlist;
   }
   List<Widget> battingorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < batinning1.length; i++) {
       {
         squadlist.add(
@@ -2307,7 +2307,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     return squadlist;
   }
   List<Widget> batting3order() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < batinning3.length; i++) {
       {
         squadlist.add(
@@ -2450,7 +2450,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     return squadlist;
   }
   List<Widget> batting4order() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < batinning4.length; i++) {
       {
         squadlist.add(
@@ -2593,7 +2593,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     return squadlist;
   }
   List<Widget> batting2ndorder() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < batinning2.length; i++) {
 
         squadlist.add(
@@ -2735,7 +2735,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     return squadlist;
   }
   List<Widget> bowlingorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < inning1.length; i++) {
       {
         squadlist.add(Container(
@@ -2847,7 +2847,7 @@ class _TestmatchState extends State<Testmatchdetail> {
   }
 
   List<Widget> bowlingsecondorderlist() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < inning2.length; i++) {
       {
         squadlist.add(Container(
@@ -2968,7 +2968,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     return squadlist;
   }
   List<Widget> bowlingorder3list() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < inning3.length; i++) {
       {
         squadlist.add(Container(
@@ -3080,7 +3080,7 @@ class _TestmatchState extends State<Testmatchdetail> {
   }
 
   List<Widget> bowlingsecondorder4list() {
-    List<Widget> squadlist = new List();
+    List<Widget> squadlist = [];
     for (int i = 0; i < inning4.length; i++) {
 
 
@@ -3202,7 +3202,7 @@ class _TestmatchState extends State<Testmatchdetail> {
   }
 
   List <Widget>balls(){
-    List<Widget> balllist = new List();
+    List<Widget> balllist = [];
     for (int i = recentballs.length-1; i >= 0; i--) {
       balllist.add(Container(
         child: Column(
@@ -3234,7 +3234,7 @@ class _TestmatchState extends State<Testmatchdetail> {
     }
     return balllist;
   }
-  dynamic scoredata=new List();
+  dynamic scoredata=[];
   var outtypes={};
   void getoutdate() async{
     var url="https://cricket.sportmonks.com/api/v2.0/scores?api_token=${matchkey}";
@@ -3248,7 +3248,7 @@ class _TestmatchState extends State<Testmatchdetail> {
 
 
       });
-      print("bjkb" + response.request.url.toString());
+      print("bjkb" + response.request!.url!.toString());
       print("bjkb" + response.statusCode.toString());
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);

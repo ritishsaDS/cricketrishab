@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:countdown_timer_simple/countdown_timer_simple.dart';
 import 'package:flutter/material.dart';
-import 'package:CricScore_App/UI/Quizmain.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Quizmain.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 
 import 'package:http/http.dart';
 class Quizmatches extends StatefulWidget{
@@ -16,10 +16,10 @@ class Quizmatches extends StatefulWidget{
 class _QuizmatchesState extends State<Quizmatches> with SingleTickerProviderStateMixin{
   bool  isLoading = true;
   bool isError=true;
-  AnimationController _controller;
+  AnimationController? _controller;
   var countdownDuration;
   Duration duration = Duration();
-  Timer timer;
+  Timer? timer;
   String twoDigits(int n) => n.toString().padLeft(2,'0');
   var hours  ;
   var minutes;
@@ -27,10 +27,10 @@ class _QuizmatchesState extends State<Quizmatches> with SingleTickerProviderStat
   bool countDown =true;
   var currentTime = DateTime.now();
   var diff ;
-  TabController _tabController;
+  TabController? _tabController;
   @override
   void initState() {
-    _tabController = new TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     getQuizMatches();
      hours =twoDigits(duration.inHours);
      minutes =twoDigits(duration.inMinutes.remainder(60));
@@ -188,7 +188,7 @@ Upcomingmatches.add(matches[i]);
   }
 
   List<Widget>getquizMtcheswidget(){
-    List<Widget>matchwidget=new List();
+    List<Widget>matchwidget=[];
     for(int i=0;i<Upcomingmatches.length;i++){
      diff= DateTime.parse(Upcomingmatches[i]["date"]).difference(currentTime).inMinutes;
      print(diff);
@@ -311,7 +311,7 @@ Upcomingmatches.add(matches[i]);
                       Text("Finishes in: "),
                       CountdownTimerSimple(
                           textStyle: TextStyle(color: Colors.red,fontSize: 14),
-                          endTime: DateTime.now().millisecondsSinceEpoch + 1000 *60*diff ,
+                          endTime: (DateTime.now().millisecondsSinceEpoch + 1000 * 60 * diff).toInt(),
 
                           onEnd: () {
 
@@ -364,7 +364,7 @@ Expanded(child: SizedBox()),
     return matchwidget;
   }
   List<Widget>getCompletedMtcheswidget(){
-    List<Widget>matchwidget=new List();
+    List<Widget>matchwidget=[];
     for(int i=0;i<Completedmatches.length;i++){
 
 
@@ -537,7 +537,7 @@ Expanded(child: SizedBox()),
         ]
     );
   }
-  Widget buildTimeCard({@required String time, @required String header}) =>
+  Widget buildTimeCard({required String time, required String header}) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -556,7 +556,7 @@ Expanded(child: SizedBox()),
         ],
       );
 }class Countdown extends AnimatedWidget {
-  Countdown({Key key, this.animation}) : super(key: key, listenable: animation);
+  Countdown({super.key, required this.animation}) : super(listenable: animation);
   Animation<int> animation;
 
   @override

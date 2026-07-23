@@ -3,9 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:CricScore_App/Homepage.dart';
-import 'package:CricScore_App/UI/MainScreen.dart';
-import 'package:CricScore_App/splashscreen.dart';
+import 'package:cricscore_app/Homepage.dart';
+import 'package:cricscore_app/UI/MainScreen.dart';
+import 'package:cricscore_app/splashscreen.dart';
 
 import 'UI/Dashboard.dart';
 import 'UI/Stopwatch.dart';
@@ -26,10 +26,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var fcmtoken;
-  FirebaseMessaging messaging;
-  AppUpdateInfo _updateInfo;
+  FirebaseMessaging? messaging;
+  AppUpdateInfo? _updateInfo;
 
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   bool _flexibleUpdateAvailable = false;
   @override
@@ -38,8 +38,8 @@ class _MyAppState extends State<MyApp> {
       print("completed");
       setState(() {});
       messaging = FirebaseMessaging.instance;
-      messaging.getToken().then((value) {
-        print("fcm" + value);
+      messaging!.getToken().then((value) {
+        print("fcm" + (value ?? ""));
         fcmtoken = value;
         // _getId();
       } );    super.initState();
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       print("Check Update");
       setState(() {
         _updateInfo = info;
-        print("Check Update"+_updateInfo.flexibleUpdateAllowed.toString());
+        print("Check Update" + (_updateInfo?.flexibleUpdateAllowed).toString());
       });
     }).catchError((e) {
       showSnack(e.toString());
@@ -61,14 +61,14 @@ class _MyAppState extends State<MyApp> {
 
   void showSnack(String text) {
     if (_scaffoldKey.currentContext != null) {
-      ScaffoldMessenger.of(_scaffoldKey.currentContext)
+      ScaffoldMessenger.of(_scaffoldKey.currentContext!)
           .showSnackBar(SnackBar(content: Text(text)));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 

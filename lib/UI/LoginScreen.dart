@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:CricScore_App/UI/Quizmain.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Quizmain.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'QUizScreen.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -33,8 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
       await showDialog<String>(
         context: context,
         barrierDismissible: false,
-        builder: (BuildContext context) => new AlertDialog(
-          title: new Text("CricScore Says-"),
+        builder: (BuildContext context) => AlertDialog(
+          title: Text("CricScore Says-"),
           content: Container(
             height: SizeConfig.screenHeight*0.20,
             child: Column(
@@ -47,8 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      primary: Color(0XFF3B5998),
+                  style: ElevatedButton.styleFrom(backgroundColor: Color(0XFF3B5998),
                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       textStyle: TextStyle(
                           fontSize: 16,
@@ -63,8 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      primary: Color(0XFFDD4B39),
+                  style: ElevatedButton.styleFrom(backgroundColor: Color(0XFFDD4B39),
                       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       textStyle: TextStyle(
                           fontSize: 16,
@@ -304,7 +302,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Checkbox(value: rememberMe,
                                     onChanged: (value){
                                   setState(() {
-                                    rememberMe = value;
+                                    rememberMe = value ?? false;
                                   });
                                     },
                                 activeColor: Color(lightBlue),
@@ -360,7 +358,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child:  isLoading
                               ? CircularProgressIndicator(
                             valueColor:
-                            new AlwaysStoppedAnimation<
+                            AlwaysStoppedAnimation<
                                 Color>(Colors.white),
                           )
                               : Text("SignIn",
@@ -416,7 +414,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     ));
   }
-  dynamic loginwithserver = new List();
+  dynamic loginwithserver = [];
   signin() async {
     try {
       final response = await post(Uri.parse("http://royalgujarati.com/chief/public/api/user/login"), body: {

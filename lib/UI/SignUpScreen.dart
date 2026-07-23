@@ -1,10 +1,10 @@
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -19,10 +19,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController pwd = TextEditingController();
   TextEditingController cPwd = TextEditingController();
 
-  FocusNode fullNameFn;
-  FocusNode usernameFn;
-  FocusNode pwdFn;
-  FocusNode cPwdFn;
+  late FocusNode fullNameFn;
+  late FocusNode usernameFn;
+  late FocusNode pwdFn;
+  late FocusNode cPwdFn;
 
   @override
   void initState() {

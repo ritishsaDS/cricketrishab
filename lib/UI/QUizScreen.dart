@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:CricScore_App/UI/MainScreen.dart';
+import 'package:cricscore_app/UI/MainScreen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:cricscore_app/Utils/facebook_login_compat.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
-import 'package:CricScore_App/UI/Quizmain.dart';
-import 'package:CricScore_App/UI/Quizmatches.dart';
-import 'package:CricScore_App/UI/quizdialog.dart';
-import 'package:CricScore_App/Utils/Colors.dart';
-import 'package:CricScore_App/Utils/SizeConfig.dart';
+import 'package:cricscore_app/UI/Quizmain.dart';
+import 'package:cricscore_app/UI/Quizmatches.dart';
+import 'package:cricscore_app/UI/quizdialog.dart';
+import 'package:cricscore_app/Utils/Colors.dart';
+import 'package:cricscore_app/Utils/SizeConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Quizscreen extends StatefulWidget {
@@ -22,10 +22,10 @@ class Quizscreen extends StatefulWidget {
 }
 
 class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   var name ;
   var image = 'www';
-  GoogleSignInAccount _userObj;
+  GoogleSignInAccount? _userObj;
   bool isLoggedIn = false;
   var profileData;
   Map userfb = {};
@@ -35,7 +35,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
   bool isLoading = false;
   bool isError = true;
   String quiztext = '';
-  final databaseReference = FirebaseDatabase.instance.reference();
+  final databaseReference = FirebaseDatabase.instance.ref();
   String testDevice = 'YOUR_DEVICE_ID';
   int maxFailedLoadAttempts = 3;
   int item = 0;
@@ -45,13 +45,13 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
     nonPersonalizedAds: true,
   );
 
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   bool _loadingAnchoredBanner = false;
 
   var pastmatches=[];
@@ -59,14 +59,14 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
   var today;
   void _createInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/1033173712',
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             print('$ad loaded');
             _interstitialAd = ad;
             _numInterstitialLoadAttempts = 0;
-            _interstitialAd.setImmersiveMode(true);
+            _interstitialAd!.setImmersiveMode(true);
           },
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error.');
@@ -84,7 +84,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -98,7 +98,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
   }
   @override
@@ -110,7 +110,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
   }
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -134,7 +134,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
       print('Warning: attempt to show rewarded before loaded.');
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (RewardedAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
@@ -149,15 +149,15 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
     });
     _rewardedAd = null;
   }
 
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
     await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -194,7 +194,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
   @override
   void initState() {
 
-    _tabController = new TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     getuserdetail();
     readData();
     getDetail();
@@ -386,8 +386,7 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
                       googlelogin();
                      // Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                        primary: Color(0XFFDD4B39),
+                    style: ElevatedButton.styleFrom(backgroundColor: Color(0XFFDD4B39),
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                         textStyle: TextStyle(
                             fontSize: 16,
@@ -407,8 +406,10 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
         _createAnchoredBanner(context);
       }
 
-      return WillPopScope(
-        onWillPop: (){
+      return PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) return;
           Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
         },
         child: SafeArea(
@@ -678,9 +679,9 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
                   if (_anchoredBanner != null)
                     Container(
                       color: Colors.green,
-                      width: _anchoredBanner.size.width.toDouble(),
-                      height: _anchoredBanner.size.height.toDouble(),
-                      child: AdWidget(ad: _anchoredBanner),),
+                      width: _anchoredBanner!.size.width.toDouble(),
+                      height: _anchoredBanner!.size.height.toDouble(),
+                      child: AdWidget(ad: _anchoredBanner!),),
                 ],),
                 Column(children: [
                   SizedBox(height: 10,),
@@ -947,9 +948,9 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
                     if (_anchoredBanner != null)
                       Container(
                         color: Colors.green,
-                        width: _anchoredBanner.size.width.toDouble(),
-                        height: _anchoredBanner.size.height.toDouble(),
-                        child: AdWidget(ad: _anchoredBanner),),
+                        width: _anchoredBanner!.size.width.toDouble(),
+                        height: _anchoredBanner!.size.height.toDouble(),
+                        child: AdWidget(ad: _anchoredBanner!),),
                   ],)
               ],
             ),
@@ -988,13 +989,13 @@ class _QuizscreenState extends State<Quizscreen> with SingleTickerProviderStateM
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       name = prefs.getString("name");
-      image = prefs.getString("image");
+      image = prefs.getString("image") ?? '';
     });
   }
 
-  dynamic prizes = new List();
-  dynamic winner = new List();
-  dynamic userdetail = new List();
+  dynamic prizes = [];
+  dynamic winner = [];
+  dynamic userdetail = [];
   Future<void> getprizes() async {
     setState(() {
       isLoading = true;
@@ -1131,7 +1132,7 @@ print(userdetail);
   }
 
   List<Widget> winneelist() {
-    List<Widget> prizewidget = new List();
+    List<Widget> prizewidget = [];
     for (int i = 0; i < winner.length; i++) {
       prizewidget.add(Table(
           columnWidths: {
@@ -1143,7 +1144,7 @@ print(userdetail);
           border: TableBorder(
               horizontalInside: BorderSide(
                 width: 5,
-                color: Colors.grey[300],
+                color: Colors.grey[300]!,
                 style: BorderStyle.solid,
               ),
               verticalInside: BorderSide(width: 2, color: Colors.black)),
@@ -1167,14 +1168,14 @@ print(userdetail);
     return prizewidget;
   }
   List<Widget> Prizeslist() {
-    List<Widget> prizewidget = new List();
+    List<Widget> prizewidget = [];
     for (int i = 0; i < prizes.length; i++) {
       prizewidget.add(Table(
           defaultColumnWidth: FixedColumnWidth(120.0),
           border: TableBorder(
               horizontalInside: BorderSide(
                 width: 5,
-                color: Colors.grey[300],
+                color: Colors.grey[300]!,
                 style: BorderStyle.solid,
               ),
               verticalInside: BorderSide(width: 2, color: Colors.black)),
@@ -1200,11 +1201,11 @@ print(userdetail);
 
   void readData() {
     print(";jnk;jnkasdv;jnko");
-    databaseReference.once().then((DataSnapshot snapshot) {
+    databaseReference.get().then((DataSnapshot snapshot) {
       print('ranking : ${snapshot.value}');
       //  print('ranking : ${snapshot.value['ImagesOdi']}');
       setState(() {
-        quiztext = snapshot.value['QuizText'];
+        quiztext = (snapshot.value as Map)['QuizText'];
       });
     });
   }
@@ -1216,23 +1217,23 @@ print(userdetail);
         //_isLoggedIn = true;
         _userObj = userData;
         print("jejjjnkjnkek"+_userObj.toString());
-        print(_userObj.displayName);
-        print(_userObj.id);
-        print(_userObj.photoUrl);
-        print(_userObj.email);
-        print(_userObj.authHeaders);
-        if (_userObj.displayName != null) {
+        print(_userObj!.displayName!);
+        print(_userObj!.id!);
+        print(_userObj!.photoUrl!);
+        print(_userObj!.email!);
+        print(_userObj!.authHeaders!);
+        if (_userObj!.displayName! != null) {
           // //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUpCook(
           //     name:_userObj.displayName,
           //     email:_userObj.email
           // )));
           data={
-            "email": _userObj.email,
-            'name':_userObj.displayName,
+            "email": _userObj!.email!,
+            'name':_userObj!.displayName!,
 
-            'image':_userObj.photoUrl,
+            'image':_userObj!.photoUrl!,
             "phone":null,
-            "provider_id":_userObj.id,
+            "provider_id":_userObj!.id!,
 
             "provider":"Google"
           };
@@ -1243,12 +1244,12 @@ print(userdetail);
                 },
                 body: {
 
-                  "email": _userObj.email,
-                  'name': _userObj.displayName,
+                  "email": _userObj!.email!,
+                  'name': _userObj!.displayName!,
 
-                  'image': _userObj.photoUrl,
+                  'image': _userObj!.photoUrl!,
                   "phone": "",
-                  "provider_id": _userObj.id,
+                  "provider_id": _userObj!.id!,
 
                   "provider": "Google"}
             );
@@ -1257,10 +1258,10 @@ print(userdetail);
             if (response.statusCode == 200) {
               final responseJson = json.decode(response.body);
               SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setString("name", _userObj.displayName);
-              prefs.setString("email", _userObj.email);
-              prefs.setString("image", _userObj.photoUrl);
-              prefs.setString("provider_id", _userObj.id);
+              prefs.setString("name", _userObj!.displayName!);
+              prefs.setString("email", _userObj!.email!);
+              prefs.setString("image", _userObj!.photoUrl!);
+              prefs.setString("provider_id", _userObj!.id!);
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Quizscreen()));
 
               setState(() {
@@ -1297,7 +1298,7 @@ print(userdetail);
     await facebookLogin.logInWithReadPermissions(['email']);
     switch (facebookLoginResult.status) {
       case FacebookLoginStatus.error:
-        print("Error"+facebookLoginResult.errorMessage);
+        print("Error" + (facebookLoginResult.errorMessage ?? ""));
         //onLoginStatusChanged(false);
         break;
       case FacebookLoginStatus.cancelledByUser:
@@ -1307,7 +1308,7 @@ print(userdetail);
       case FacebookLoginStatus.loggedIn:
         var graphResponse = await get(
             Uri.parse('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture&access_token='
-                '${facebookLoginResult.accessToken.token}'
+                '${facebookLoginResult.accessToken?.token}'
             ));
 
         var profile = json.decode(graphResponse.body);

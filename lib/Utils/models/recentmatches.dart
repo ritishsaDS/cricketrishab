@@ -14,17 +14,17 @@ class Welcome {
     this.result,
   });
 
-  int success;
-  List<Result> result;
+  int? success;
+  List<Result>? result;
 
   factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
     success: json["success"],
-    result: List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
+    result: json["result"] == null ? null : List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
-    "result": List<dynamic>.from(result.map((x) => x.toJson())),
+    "result": result == null ? null : List<dynamic>.from(result!.map((x) => x.toJson())),
   };
 }
 
@@ -61,40 +61,40 @@ class Result {
     this.lineups,
   });
 
-  String eventKey;
-  DateTime eventDateStart;
-  DateTime eventDateStop;
-  String eventTime;
-  String eventHomeTeam;
-  String homeTeamKey;
-  String eventAwayTeam;
-  String awayTeamKey;
-  String eventServiceHome;
-  String eventServiceAway;
-  String eventHomeFinalResult;
-  String eventAwayFinalResult;
-  String eventHomeRr;
-  String eventAwayRr;
-  String eventStatus;
-  dynamic eventStatusInfo;
-  String countryName;
-  String leagueName;
-  String leagueKey;
-  String leagueRound;
-  String leagueSeason;
-  String eventLive;
-  String eventHomeTeamLogo;
-  String eventAwayTeamLogo;
-  List<dynamic> scorecard;
-  List<dynamic> ballByBall;
-  List<dynamic> wickets;
-  List<dynamic> extra;
-  Lineups lineups;
+  String? eventKey;
+  DateTime? eventDateStart;
+  DateTime? eventDateStop;
+  String? eventTime;
+  String? eventHomeTeam;
+  String? homeTeamKey;
+  String? eventAwayTeam;
+  String? awayTeamKey;
+  String? eventServiceHome;
+  String? eventServiceAway;
+  String? eventHomeFinalResult;
+  String? eventAwayFinalResult;
+  String? eventHomeRr;
+  String? eventAwayRr;
+  String? eventStatus;
+  dynamic? eventStatusInfo;
+  String? countryName;
+  String? leagueName;
+  String? leagueKey;
+  String? leagueRound;
+  String? leagueSeason;
+  String? eventLive;
+  String? eventHomeTeamLogo;
+  String? eventAwayTeamLogo;
+  List<dynamic>? scorecard;
+  List<dynamic>? ballByBall;
+  List<dynamic>? wickets;
+  List<dynamic>? extra;
+  Lineups? lineups;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     eventKey: json["event_key"],
-    eventDateStart: DateTime.parse(json["event_date_start"]),
-    eventDateStop: DateTime.parse(json["event_date_stop"]),
+    eventDateStart: json["event_date_start"] == null ? null : DateTime.parse(json["event_date_start"]),
+    eventDateStop: json["event_date_stop"] == null ? null : DateTime.parse(json["event_date_stop"]),
     eventTime: json["event_time"],
     eventHomeTeam: json["event_home_team"],
     homeTeamKey: json["home_team_key"],
@@ -116,17 +116,17 @@ class Result {
     eventLive: json["event_live"],
     eventHomeTeamLogo: json["event_home_team_logo"],
     eventAwayTeamLogo: json["event_away_team_logo"],
-    scorecard: List<dynamic>.from(json["scorecard"].map((x) => x)),
-    ballByBall: List<dynamic>.from(json["ball_by_ball"].map((x) => x)),
-    wickets: List<dynamic>.from(json["wickets"].map((x) => x)),
-    extra: List<dynamic>.from(json["extra"].map((x) => x)),
-    lineups: Lineups.fromJson(json["lineups"]),
+    scorecard: json["scorecard"] == null ? null : List<dynamic>.from(json["scorecard"].map((x) => x)),
+    ballByBall: json["ball_by_ball"] == null ? null : List<dynamic>.from(json["ball_by_ball"].map((x) => x)),
+    wickets: json["wickets"] == null ? null : List<dynamic>.from(json["wickets"].map((x) => x)),
+    extra: json["extra"] == null ? null : List<dynamic>.from(json["extra"].map((x) => x)),
+    lineups: json["lineups"] == null ? null : Lineups.fromJson(json["lineups"]),
   );
 
   Map<String, dynamic> toJson() => {
     "event_key": eventKey,
-    "event_date_start": "${eventDateStart.year.toString().padLeft(4, '0')}-${eventDateStart.month.toString().padLeft(2, '0')}-${eventDateStart.day.toString().padLeft(2, '0')}",
-    "event_date_stop": "${eventDateStop.year.toString().padLeft(4, '0')}-${eventDateStop.month.toString().padLeft(2, '0')}-${eventDateStop.day.toString().padLeft(2, '0')}",
+    "event_date_start": eventDateStart == null ? null : "${eventDateStart!.year.toString().padLeft(4, '0')}-${eventDateStart!.month.toString().padLeft(2, '0')}-${eventDateStart!.day.toString().padLeft(2, '0')}",
+    "event_date_stop": eventDateStop == null ? null : "${eventDateStop!.year.toString().padLeft(4, '0')}-${eventDateStop!.month.toString().padLeft(2, '0')}-${eventDateStop!.day.toString().padLeft(2, '0')}",
     "event_time": eventTime,
     "event_home_team": eventHomeTeam,
     "home_team_key": homeTeamKey,
@@ -148,11 +148,11 @@ class Result {
     "event_live": eventLive,
     "event_home_team_logo": eventHomeTeamLogo,
     "event_away_team_logo": eventAwayTeamLogo,
-    "scorecard": List<dynamic>.from(scorecard.map((x) => x)),
-    "ball_by_ball": List<dynamic>.from(ballByBall.map((x) => x)),
-    "wickets": List<dynamic>.from(wickets.map((x) => x)),
-    "extra": List<dynamic>.from(extra.map((x) => x)),
-    "lineups": lineups.toJson(),
+    "scorecard": scorecard == null ? null : List<dynamic>.from(scorecard!.map((x) => x)),
+    "ball_by_ball": ballByBall == null ? null : List<dynamic>.from(ballByBall!.map((x) => x)),
+    "wickets": wickets == null ? null : List<dynamic>.from(wickets!.map((x) => x)),
+    "extra": extra == null ? null : List<dynamic>.from(extra!.map((x) => x)),
+    "lineups": lineups?.toJson(),
   };
 }
 
@@ -162,8 +162,8 @@ class Lineups {
     this.awayTeam,
   });
 
-  Team homeTeam;
-  Team awayTeam;
+  Team? homeTeam;
+  Team? awayTeam;
 
   factory Lineups.fromJson(Map<String, dynamic> json) => Lineups(
     homeTeam: Team.fromJson(json["home_team"]),
@@ -171,8 +171,8 @@ class Lineups {
   );
 
   Map<String, dynamic> toJson() => {
-    "home_team": homeTeam.toJson(),
-    "away_team": awayTeam.toJson(),
+    "home_team": homeTeam?.toJson(),
+    "away_team": awayTeam?.toJson(),
   };
 }
 
@@ -182,16 +182,16 @@ class Team {
     this.coaches,
   });
 
-  List<dynamic> startingLineups;
-  List<dynamic> coaches;
+  List<dynamic>? startingLineups;
+  List<dynamic>? coaches;
 
   factory Team.fromJson(Map<String, dynamic> json) => Team(
-    startingLineups: List<dynamic>.from(json["starting_lineups"].map((x) => x)),
-    coaches: List<dynamic>.from(json["coaches"].map((x) => x)),
+    startingLineups: json["starting_lineups"] == null ? null : List<dynamic>.from(json["starting_lineups"].map((x) => x)),
+    coaches: json["coaches"] == null ? null : List<dynamic>.from(json["coaches"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
-    "starting_lineups": List<dynamic>.from(startingLineups.map((x) => x)),
-    "coaches": List<dynamic>.from(coaches.map((x) => x)),
+    "starting_lineups": startingLineups == null ? null : List<dynamic>.from(startingLineups!.map((x) => x)),
+    "coaches": coaches == null ? null : List<dynamic>.from(coaches!.map((x) => x)),
   };
 }
