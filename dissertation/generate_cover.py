@@ -21,22 +21,14 @@ def center_text(page, y, text, fontsize, color=C_TITLE, bold=False):
     page.insert_text(((W - tw) / 2, y), text, fontname=fn, fontsize=fontsize, color=color)
 
 
-def center_title_line3(page, y, fontsize=13.2, color=C_TITLE):
-    parts = [("hebo", "SBE-"), ("symbol", "b"), ("hebo", "-CD-Chitosan Systems Against Cervical Cancer")]
-    total = sum(pymupdf.get_text_length(t, fontname=f, fontsize=fontsize) for f, t in parts)
-    x = (W - total) / 2
-    for fn, text in parts:
-        page.insert_text((x, y), text, fontname=fn, fontsize=fontsize, color=color)
-        x += pymupdf.get_text_length(text, fontname=fn, fontsize=fontsize)
-
-
 def main():
     doc = pymupdf.open()
     page = doc.new_page(width=W, height=H)
 
-    center_text(page, 64.5, "Physicochemical Optimization and Biological Evaluation of", 13.2, bold=True)
-    center_text(page, 81.5, "Quercetin-Loaded", 13.2, bold=True)
-    center_title_line3(page, 98.5)
+    # Title
+    center_text(page, 64.5, "Formulation, Optimization, and Evaluation of", 13.2, bold=True)
+    center_text(page, 81.5, "Canagliflozin Nanosuspension-Loaded", 13.2, bold=True)
+    center_text(page, 98.5, "Immediate-Release Pellets", 13.2, bold=True)
 
     center_text(
         page,
@@ -59,9 +51,9 @@ def main():
     center_text(page, y + 26, "IN", 11.0)
     center_text(page, y + 49.5, "PHARMACEUTICS", 11.5, bold=True)
     center_text(page, y + 80.5, "Submitted By:", 11.0)
-    center_text(page, y + 104.5, "Abhay Sharma", 11.5, bold=True)
-    center_text(page, y + 126.0, "242718010046", 11.5, bold=True)
-    center_text(page, y + 153.5, "2024-2026", 11.5, bold=True)
+    center_text(page, y + 104.5, "Nishant Sharma", 11.5, bold=True)
+    center_text(page, y + 126.0, "2512718006", 11.5, bold=True)
+    center_text(page, y + 153.5, "2025-2027", 11.5, bold=True)
     center_text(page, y + 183.5, "Under the Supervision of", 11.0)
 
     page.insert_text((162.0, y + 207.5), "Supervisor", fontname="helv", fontsize=10.5, color=C_TITLE)
