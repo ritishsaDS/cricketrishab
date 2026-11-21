@@ -51,7 +51,7 @@ def main():
     center_text(page, y + 26, "IN", 11.0)
     center_text(page, y + 49.5, "PHARMACEUTICS", 11.5, bold=True)
     center_text(page, y + 80.5, "Submitted By:", 11.0)
-    center_text(page, y + 104.5, "Nishant Sharma", 11.5, bold=True)
+    center_text(page, y + 104.5, "Nishant", 11.5, bold=True)
     center_text(page, y + 126.0, "2512718006", 11.5, bold=True)
     center_text(page, y + 153.5, "2025-2027", 11.5, bold=True)
     center_text(page, y + 183.5, "Under the Supervision of", 11.0)
