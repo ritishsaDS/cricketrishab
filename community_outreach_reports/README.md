@@ -5,14 +5,19 @@
 **Programme:** B.voc (Hospitality and Tourism) Sem V  
 **Session:** 2026-27
 
-## Download (recommended)
+## Formatting
+- Headings: 16 pt
+- Subheadings: 14 pt
+
+## Download
 Open this folder on GitHub → click a file → **Download**.
 
-### Full report (cover + declaration + Activities 3, 4, 5)
-- **PDF (easy to open on phone):** `Himshikha_Community_Outreach_Project.pdf`
-- **Word:** `Himshikha_Community_Outreach_Project.docx`
+### Full report
+- `Himshikha_Community_Outreach_Project.pdf` (recommended)
+- `Himshikha_Community_Outreach_Project.docx`
 
-### Individual activity files
-- Activity 3: Cleanliness Drive
-- Activity 4: Tree Plantation Drive
-- Activity 5: Cleanliness and Hygiene Awareness (`Activity5_Cleanliness_Hygiene_Awareness.pdf` / `.docx`)
+Includes: Cover, Declaration, Activities 3–6
+
+### Individual
+- Activity 5: `Activity5_Cleanliness_Hygiene_Awareness.pdf`
+- Activity 6: `Activity6_Yoga_Session.pdf`
