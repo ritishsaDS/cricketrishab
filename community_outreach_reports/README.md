@@ -1,19 +1,17 @@
-# Community Outreach Activity Reports
+# Community Outreach Project – Himshikha
 
-Download any file below from this folder on GitHub (open the file → Download / Raw).
+**Name:** Himshikha  
+**Roll No.:** 24113000009  
+**Programme:** B.voc (Hospitality and Tourism) Sem V  
+**Session:** 2026-27
 
-## Activity 3 – Cleanliness Drive
-- Duration: 7 Hours
-- Place: Kanya Maha Vidyalaya, Jalandhar
-- Date: 27/10/26 & 28/10/26
-- Files: `Activity3_Cleanliness_Drive.pdf` (easy to view) · `Activity3_Cleanliness_Drive.docx` (Word)
+## Download (recommended)
+Open this folder on GitHub → click a file → **Download**.
 
-## Activity 4 – Environmental Awareness – Tree Plantation Drive
-- Duration: 4 Hours
-- Place: Laroi, Bhogpur, Jalandhar
-- Date: 30/10/26
-- Files: `Activity4_Tree_Plantation_Drive.pdf` · `Activity4_Tree_Plantation_Drive.docx`
+### Full report (cover + declaration + Activity 3 + Activity 4)
+- **PDF (easy to open on phone):** `Himshikha_Community_Outreach_Project.pdf`
+- **Word:** `Himshikha_Community_Outreach_Project.docx`
 
-## Combined
-- `Community_Outreach_Activities_3_and_4.pdf`
-- `Community_Outreach_Activities_3_and_4.docx`
+### Individual activity files also available
+- Activity 3: Cleanliness Drive (PDF / DOCX)
+- Activity 4: Tree Plantation Drive (PDF / DOCX)
