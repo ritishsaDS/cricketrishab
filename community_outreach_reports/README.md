@@ -8,10 +8,11 @@
 ## Download (recommended)
 Open this folder on GitHub → click a file → **Download**.
 
-### Full report (cover + declaration + Activity 3 + Activity 4)
+### Full report (cover + declaration + Activities 3, 4, 5)
 - **PDF (easy to open on phone):** `Himshikha_Community_Outreach_Project.pdf`
 - **Word:** `Himshikha_Community_Outreach_Project.docx`
 
-### Individual activity files also available
-- Activity 3: Cleanliness Drive (PDF / DOCX)
-- Activity 4: Tree Plantation Drive (PDF / DOCX)
+### Individual activity files
+- Activity 3: Cleanliness Drive
+- Activity 4: Tree Plantation Drive
+- Activity 5: Cleanliness and Hygiene Awareness (`Activity5_Cleanliness_Hygiene_Awareness.pdf` / `.docx`)
