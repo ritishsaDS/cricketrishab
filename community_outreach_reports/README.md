@@ -5,19 +5,11 @@
 **Programme:** B.voc (Hospitality and Tourism) Sem V  
 **Session:** 2026-27
 
-## Formatting
-- Headings: 16 pt
-- Subheadings: 14 pt
+## Place note
+Village/community activities use **Bullowal, Jalandhar** (Laroi/Bhogpur replaced).
 
 ## Download
-Open this folder on GitHub → click a file → **Download**.
-
-### Full report
-- `Himshikha_Community_Outreach_Project.pdf` (recommended)
-- `Himshikha_Community_Outreach_Project.docx`
-
-Includes: Cover, Declaration, Activities 3–6
-
-### Individual
-- Activity 5: `Activity5_Cleanliness_Hygiene_Awareness.pdf`
-- Activity 6: `Activity6_Yoga_Session.pdf`
+- Full report PDF: `Himshikha_Community_Outreach_Project.pdf`
+- Full report Word: `Himshikha_Community_Outreach_Project.docx`
+- Activity 7: `Activity7_Voluntary_Teaching.pdf`
+- Activity 8: `Activity8_Charity_Community_Support.pdf`
